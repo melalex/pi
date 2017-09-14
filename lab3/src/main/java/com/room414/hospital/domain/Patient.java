@@ -1,4 +1,4 @@
-package com.room414.hospital.dao;
+package com.room414.hospital.domain;
 
 import lombok.Data;
 
