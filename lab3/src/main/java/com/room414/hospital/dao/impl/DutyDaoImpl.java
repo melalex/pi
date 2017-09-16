@@ -20,10 +20,10 @@ public class DutyDaoImpl implements DutyDao {
 
     private static final String FIND_BY_LAST_NAME_QUERY =
             "SELECT * " +
-            "FROM duty AS d " +
-            "   LEFT JOIN doctor AS doc " +
-            "       ON doc.application_user = d.doctor " +
-            "WHERE doc.last_name LIKE ? LIMIT ? OFFSET ?";
+            "FROM duty " +
+            "   LEFT JOIN doctor " +
+            "       ON doctor.application_user = duty.doctor " +
+            "WHERE doctor.last_name LIKE ? LIMIT ? OFFSET ?";
 
     // @formatter:on
 

@@ -37,10 +37,10 @@ public class DoctorDaoImpl implements DoctorDao {
 
     private static final String FIND_BY_DUTY_QUERY =
             "SELECT * " +
-            "FROM doctor AS doc " +
-            "   LEFT JOIN duty AS d " +
-            "       ON doc.application_user = d.doctor " +
-            "WHERE d.date = ? LIMIT ? OFFSET ?";
+            "FROM doctor " +
+            "   LEFT JOIN duty " +
+            "       ON doctor.application_user = duty.doctor " +
+            "WHERE duty.date = ? LIMIT ? OFFSET ?";
 
     private static final String FIND_BY_SECESSION_QUERY =
             "SELECT * " +
