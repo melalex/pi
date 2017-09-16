@@ -10,4 +10,6 @@ public interface DutyDao {
     void create(Duty duty);
 
     List<Duty> findByLastName(String lastName, Pageable pageable);
+
+    Integer countByLastName(String lastName);
 }

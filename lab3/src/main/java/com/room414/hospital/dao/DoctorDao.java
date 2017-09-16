@@ -3,6 +3,7 @@ package com.room414.hospital.dao;
 import com.room414.hospital.domain.Pageable;
 import com.room414.hospital.domain.entities.Doctor;
 import com.room414.hospital.domain.entities.Secession;
+import com.room414.hospital.domain.internal.DoctorCriteria;
 
 import java.util.Date;
 import java.util.List;
@@ -16,9 +17,7 @@ public interface DoctorDao {
 
     Optional<Doctor> findOne(String username);
 
-    List<Doctor> findAll(Pageable pageable);
+    List<Doctor> findByCriteria(DoctorCriteria criteria, Pageable pageable);
 
-    List<Doctor> findByDuty(Date date, Pageable pageable);
-
-    List<Doctor> findBySecession(Secession secession);
+    Integer countByCriteria(DoctorCriteria criteria);
 }

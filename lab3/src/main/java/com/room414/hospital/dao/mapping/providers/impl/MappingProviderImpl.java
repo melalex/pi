@@ -1,14 +1,12 @@
 package com.room414.hospital.dao.mapping.providers.impl;
 
-import com.room414.hospital.dao.jdbc.exceptions.JdbcException;
 import com.room414.hospital.dao.mapping.RowMapper;
 import com.room414.hospital.dao.mapping.impl.ApplicationUserMapper;
 import com.room414.hospital.dao.mapping.impl.DoctorMapper;
 import com.room414.hospital.dao.mapping.impl.DutyMapper;
 import com.room414.hospital.dao.mapping.impl.PatientMapper;
 import com.room414.hospital.dao.mapping.providers.MappingProvider;
-
-import java.util.Map;
+import com.room414.hospital.exceptions.MappingException;
 
 public class MappingProviderImpl implements MappingProvider {
 
@@ -30,7 +28,7 @@ public class MappingProviderImpl implements MappingProvider {
         } else {
             String message = String.format("No RowMapper registered for %s class", clazz);
 
-            throw new JdbcException(message);
+            throw new MappingException(message);
         }
     }
 

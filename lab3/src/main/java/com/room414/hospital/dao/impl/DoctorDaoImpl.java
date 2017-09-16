@@ -2,11 +2,15 @@ package com.room414.hospital.dao.impl;
 
 import com.room414.hospital.dao.DoctorDao;
 import com.room414.hospital.dao.ApplicationUserDao;
+import com.room414.hospital.dao.mapping.RowExtractor;
+import com.room414.hospital.dao.mapping.impl.CountExtractor;
 import com.room414.hospital.dao.query.QueryTemplate;
 import com.room414.hospital.domain.Pageable;
 import com.room414.hospital.domain.entities.Doctor;
 import com.room414.hospital.domain.entities.Secession;
+import com.room414.hospital.domain.internal.DoctorCriteria;
 import lombok.AllArgsConstructor;
+import org.intellij.lang.annotations.Language;
 
 import java.util.Date;
 import java.util.List;
@@ -16,41 +20,48 @@ import java.util.Optional;
 public class DoctorDaoImpl implements DoctorDao {
     // @formatter:off
 
+    @Language("MySQL")
     private static final String CREATE_QUERY =
             "INSERT INTO doctor (application_user, first_name, last_name, secession) " +
             "VALUES (?, ?, ?, ?)";
 
+    @Language("MySQL")
     private static final String UPDATE_QUERY =
             "UPDATE doctor " +
             "SET first_name = ?, last_name = ?, secession = ? " +
             "WHERE application_user = ?";
 
+    @Language("MySQL")
     private static final String FIND_ONE_QUERY =
             "SELECT * " +
             "FROM doctor " +
             "WHERE application_user = ?";
 
-    private static final String FIND_ALL_QUERY =
-            "SELECT * " +
-            "FROM doctor " +
-            "LIMIT ? OFFSET ?";
-
-    private static final String FIND_BY_DUTY_QUERY =
+    @Language("MySQL")
+    private static final String FIND_BY_CRITERIA_QUERY =
             "SELECT * " +
             "FROM doctor " +
             "   LEFT JOIN duty " +
             "       ON doctor.application_user = duty.doctor " +
-            "WHERE duty.date = ? LIMIT ? OFFSET ?";
+            "WHERE (? IS NULL OR doctor.secession = ?) " +
+            "       AND (? IS NULL OR duty.date = ?) " +
+            "LIMIT ? OFFSET ?";
 
-    private static final String FIND_BY_SECESSION_QUERY =
-            "SELECT * " +
+    @Language("MySQL")
+    private static final String COUNT_BY_CRITERIA_QUERY =
+            "SELECT COUNT(*) " +
             "FROM doctor " +
-            "WHERE secession = ? LIMIT ? OFFSET ?";
+            "   LEFT JOIN duty " +
+            "       ON doctor.application_user = duty.doctor " +
+            "WHERE (? IS NULL OR doctor.secession = ?) " +
+            "       AND (? IS NULL OR duty.date = ?)";
 
     // @formatter:on
 
     private QueryTemplate queryTemplate;
     private ApplicationUserDao applicationUserDao;
+
+    private final RowExtractor<Integer> countExtractor = new CountExtractor();
 
     @Override
     public void create(Doctor doctor) {
@@ -85,27 +96,25 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public List<Doctor> findAll(Pageable pageable) {
+    public List<Doctor> findByCriteria(DoctorCriteria criteria, Pageable pageable) {
         return queryTemplate.selectMany(Doctor.class)
-                .withQuery(FIND_ALL_QUERY)
+                .withQuery(FIND_BY_CRITERIA_QUERY)
+                .withParam(criteria.getSecession())
+                .withParam(criteria.getSecession())
+                .withParam(criteria.getDutyDate())
+                .withParam(criteria.getDutyDate())
                 .withParam(pageable)
                 .execute();
     }
 
     @Override
-    public List<Doctor> findByDuty(Date date, Pageable pageable) {
-        return queryTemplate.selectMany(Doctor.class)
-                .withQuery(FIND_BY_DUTY_QUERY)
-                .withParam(date)
-                .withParam(pageable)
-                .execute();
-    }
-
-    @Override
-    public List<Doctor> findBySecession(Secession secession) {
-        return queryTemplate.selectMany(Doctor.class)
-                .withQuery(FIND_BY_SECESSION_QUERY)
-                .withParam(secession)
+    public Integer countByCriteria(DoctorCriteria criteria) {
+        return queryTemplate.aggregate(countExtractor)
+                .withQuery(COUNT_BY_CRITERIA_QUERY)
+                .withParam(criteria.getSecession())
+                .withParam(criteria.getSecession())
+                .withParam(criteria.getDutyDate())
+                .withParam(criteria.getDutyDate())
                 .execute();
     }
 }

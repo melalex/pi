@@ -1,6 +1,6 @@
 package com.room414.hospital.dao.jdbc.impl;
 
-import com.room414.hospital.dao.jdbc.exceptions.JdbcException;
+import com.room414.hospital.exceptions.JdbcException;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;

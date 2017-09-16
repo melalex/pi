@@ -1,6 +1,6 @@
 package com.room414.hospital.dao.mapping.impl;
 
-import com.room414.hospital.dao.jdbc.exceptions.JdbcException;
+import com.room414.hospital.exceptions.JdbcException;
 import com.room414.hospital.dao.mapping.RowMapper;
 
 import java.sql.ResultSet;

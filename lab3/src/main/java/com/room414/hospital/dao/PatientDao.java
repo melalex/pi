@@ -15,4 +15,6 @@ public interface PatientDao {
     Optional<Patient> findOne(long id);
 
     List<Patient> findAll(Pageable pageable);
+
+    Integer countAll();
 }

@@ -4,6 +4,7 @@ import com.room414.hospital.dao.ApplicationUserDao;
 import com.room414.hospital.dao.query.QueryTemplate;
 import com.room414.hospital.domain.entities.ApplicationUser;
 import lombok.AllArgsConstructor;
+import org.intellij.lang.annotations.Language;
 
 import java.util.Optional;
 
@@ -11,10 +12,12 @@ import java.util.Optional;
 public class ApplicationUserDaoImpl implements ApplicationUserDao {
     // @formatter:off
 
+    @Language("MySQL")
     private static final String CREATE_QUERY =
             "INSERT INTO application_user (username, password) " +
             "VALUES (?, ?)";
 
+    @Language("MySQL")
     private static final String FIND_BY_USERNAME_AND_PASSWORD_QUERY =
             "SELECT * " +
             "FROM application_user " +

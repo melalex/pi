@@ -1,8 +1,11 @@
 package com.room414.hospital.dao.query.impl;
 
+import com.room414.hospital.dao.jdbc.AggregateTemplate;
 import com.room414.hospital.dao.jdbc.SelectTemplate;
 import com.room414.hospital.dao.jdbc.UpdateTemplate;
-import com.room414.hospital.dao.jdbc.exceptions.JdbcException;
+import com.room414.hospital.dao.jdbc.impl.AggregateTemplateImpl;
+import com.room414.hospital.dao.mapping.RowExtractor;
+import com.room414.hospital.exceptions.JdbcException;
 import com.room414.hospital.dao.jdbc.impl.SelectTemplateImpl;
 import com.room414.hospital.dao.jdbc.impl.UpdateTemplateImpl;
 import com.room414.hospital.dao.mapping.providers.MappingProvider;
@@ -27,6 +30,13 @@ public class QueryTemplateImpl implements QueryTemplate {
         UpdateTemplate template = new UpdateTemplateImpl(connection());
 
         return new QueryBuilder<>(template::update);
+    }
+
+    @Override
+    public <T> QueryBuilder<T> aggregate(RowExtractor<T> rowExtractor) {
+        AggregateTemplate<T> template = new AggregateTemplateImpl<>(connection(), rowExtractor);
+
+        return new QueryBuilder<>(template::aggregate);
     }
 
     @Override

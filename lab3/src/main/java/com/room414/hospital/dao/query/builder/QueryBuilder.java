@@ -46,7 +46,8 @@ public class QueryBuilder<T> {
             return withParam(anEnum.toString());
         }
 
-        public ParamsBuilder<T> withParams(Object... params) {
+        public ParamsBuilder<T> withParams(Object param, Object... params) {
+            this.params.add(param);
             this.params.addAll(Arrays.asList(params));
             return this;
         }
@@ -61,9 +62,9 @@ public class QueryBuilder<T> {
         return new ParamsBuilder<>(this);
     }
 
-    private T execute(Object... params) {
+    private T execute(Object param, Object... params) {
         checkArgument(isNotBlank(sql), "Query can't be Blank");
 
-        return callback.onBuild(sql, params);
+        return callback.onBuild(sql, param, params);
     }
 }
