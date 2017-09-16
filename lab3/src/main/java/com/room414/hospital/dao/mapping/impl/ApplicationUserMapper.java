@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ApplicationUserMapper extends RowMapperSupport<ApplicationUser> {
-    private static final String USERNAME_COLUMN_NAME = "application_user.username";
+    private static final String USERNAME_COLUMN_NAME = "application_user.doctor";
     private static final String PASSWORD_COLUMN_NAME = "application_user.password";
 
     @Override

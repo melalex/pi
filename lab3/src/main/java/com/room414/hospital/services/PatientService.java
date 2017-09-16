@@ -9,7 +9,7 @@ public interface PatientService {
 
     void create(PatientForm form);
 
-    void update(PatientForm form);
+    void update(long id, PatientForm form);
 
     Patient findById(long id);
 

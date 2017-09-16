@@ -18,6 +18,12 @@ public class ApplicationUserDaoImpl implements ApplicationUserDao {
             "VALUES (?, ?)";
 
     @Language("MySQL")
+    private static final String FIND_BY_USERNAME_QUERY =
+            "SELECT * " +
+            "FROM application_user " +
+            "WHERE username = ?";
+
+    @Language("MySQL")
     private static final String FIND_BY_USERNAME_AND_PASSWORD_QUERY =
             "SELECT * " +
             "FROM application_user " +
@@ -33,6 +39,14 @@ public class ApplicationUserDaoImpl implements ApplicationUserDao {
                 .withQuery(CREATE_QUERY)
                 .withParam(applicationUser.getUsername())
                 .withParam(applicationUser.getPassword())
+                .execute();
+    }
+
+    @Override
+    public Optional<ApplicationUser> findByUsername(String username) {
+        return queryTemplate.selectOne(ApplicationUser.class)
+                .withQuery(FIND_BY_USERNAME_QUERY)
+                .withParam(username)
                 .execute();
     }
 

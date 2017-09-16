@@ -13,6 +13,8 @@ public interface DoctorService {
 
     void create(AccountForm form);
 
+    boolean isDoctorExists(String username);
+
     Doctor findByUsername(String username);
 
     Page<Doctor> findByCriteria(DoctorCriteria criteria, Pageable pageable);

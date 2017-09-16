@@ -6,7 +6,7 @@ import lombok.experimental.Delegate;
 
 import java.util.List;
 
-@Value
+@Value(staticConstructor = "of")
 public class Page<T> {
 
     @Delegate

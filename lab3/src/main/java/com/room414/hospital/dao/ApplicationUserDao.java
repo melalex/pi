@@ -8,5 +8,7 @@ public interface ApplicationUserDao {
 
     void create(ApplicationUser applicationUser);
 
+    Optional<ApplicationUser> findByUsername(String username);
+
     Optional<ApplicationUser> findByUsernameAndPassword(String username, String password);
 }
