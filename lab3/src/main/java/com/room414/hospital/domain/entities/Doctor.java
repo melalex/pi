@@ -6,13 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 
 @Data
 public class Doctor implements Identifiable<String> {
-    private User user;
+    private ApplicationUser applicationUser;
     private String firstName;
     private String lastName;
     private Secession secession;
 
     @Override
     public String getId() {
-        return user != null ? user.getUsername() : StringUtils.EMPTY;
+        return applicationUser != null ? applicationUser.getUsername() : StringUtils.EMPTY;
     }
 }

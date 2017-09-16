@@ -4,7 +4,7 @@ import com.room414.hospital.domain.Identifiable;
 import lombok.Data;
 
 @Data
-public class User implements Identifiable<String> {
+public class ApplicationUser implements Identifiable<String> {
     private String username;
     private String password;
 

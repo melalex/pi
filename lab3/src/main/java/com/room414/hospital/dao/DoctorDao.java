@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface DoctorDao {
 
-    void create(Doctor patient);
+    void create(Doctor doctor);
 
-    void update(Doctor patient);
+    void update(Doctor doctor);
 
     Optional<Doctor> findOne(String username);
 
