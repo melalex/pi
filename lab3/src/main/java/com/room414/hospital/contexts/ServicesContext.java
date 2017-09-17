@@ -1,5 +1,6 @@
 package com.room414.hospital.contexts;
 
+import com.google.common.collect.ImmutableMap;
 import com.room414.hospital.services.*;
 import com.room414.hospital.services.impl.*;
 import lombok.AccessLevel;
@@ -19,7 +20,7 @@ class ServicesContext {
     private final DutyService dutyService = new DutyServiceImpl();
 
     @Getter(lazy = true)
-    private final LocaleService localeService = LocaleServiceImpl.create();
+    private final LocaleService localeService = new LocaleServiceImpl();
 
     @Getter(lazy = true)
     private final PatientService patientService = new PatientServiceImpl();
@@ -28,12 +29,14 @@ class ServicesContext {
     private final UserService userService = new UserServiceImpl();
 
     @Getter(lazy = true)
-    private final Map<String, Locale> supportedLocales = createSupportedLocales();
+    private final Map<String, Locale> supportedLocales = loadSupportedLocales();
 
     @Getter
     private final Locale defaultLocale = Locale.US;
 
-    private Map<String, Locale> createSupportedLocales() {
-        return null;
+    private Map<String, Locale> loadSupportedLocales() {
+        return ImmutableMap.<String, Locale>builder()
+                .put("EN", Locale.US)
+                .build();
     }
 }

@@ -25,7 +25,7 @@ public class DutyMapper extends RowMapperSupport<Duty> {
     }
 
     @Override
-    public boolean supportsClass(Class<?> clazz) {
-        return Duty.class.equals(clazz);
+    public Class<Duty> support() {
+        return Duty.class;
     }
 }

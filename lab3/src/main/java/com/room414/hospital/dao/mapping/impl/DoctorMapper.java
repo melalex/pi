@@ -28,7 +28,7 @@ public class DoctorMapper extends RowMapperSupport<Doctor> {
     }
 
     @Override
-    public boolean supportsClass(Class<?> clazz) {
-        return Doctor.class.equals(clazz);
+    public Class<Doctor> support() {
+        return Doctor.class;
     }
 }

@@ -2,7 +2,7 @@ package com.room414.hospital.commands.impl;
 
 import com.room414.hospital.commands.iternal.ExecutionResult;
 import com.room414.hospital.routing.internal.HttpMethod;
-import com.room414.hospital.routing.internal.Route;
+import com.room414.hospital.anotations.Route;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

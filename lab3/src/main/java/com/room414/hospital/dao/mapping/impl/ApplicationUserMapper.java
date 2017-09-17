@@ -20,7 +20,7 @@ public class ApplicationUserMapper extends RowMapperSupport<ApplicationUser> {
     }
 
     @Override
-    public boolean supportsClass(Class<?> clazz) {
-        return ApplicationUser.class.equals(clazz);
+    public Class<ApplicationUser> support() {
+        return ApplicationUser.class;
     }
 }

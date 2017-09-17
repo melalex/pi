@@ -12,6 +12,9 @@ public class ApplicationContext {
     private final DataSourceContext dataSourceContext = new DataSourceContext();
 
     @Delegate
+    private final MappingContext mappingContext = new MappingContext();
+
+    @Delegate
     private final DataAccessContext dataAccessContext = new DataAccessContext();
 
     @Delegate
@@ -25,6 +28,9 @@ public class ApplicationContext {
 
     @Delegate
     private final RoutingContext routingContext = new RoutingContext();
+
+    @Delegate
+    private final HandlersContext handlersContext = new HandlersContext();
 
     public static ApplicationContext getInstance() {
         return ourInstance;

@@ -17,25 +17,21 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        router.route(HttpMethod.GET, requestedUri(req)).execute(req, resp);
+        router.route(HttpMethod.GET, req.getRequestURI()).execute(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        router.route(HttpMethod.POST, requestedUri(req)).execute(req, resp);
+        router.route(HttpMethod.POST, req.getRequestURI()).execute(req, resp);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        router.route(HttpMethod.PUT, requestedUri(req)).execute(req, resp);
+        router.route(HttpMethod.PUT, req.getRequestURI()).execute(req, resp);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        router.route(HttpMethod.DELETE, requestedUri(req)).execute(req, resp);
-    }
-
-    private String requestedUri(HttpServletRequest request) {
-        return request.getRequestURI();
+        router.route(HttpMethod.DELETE, req.getRequestURI()).execute(req, resp);
     }
 }

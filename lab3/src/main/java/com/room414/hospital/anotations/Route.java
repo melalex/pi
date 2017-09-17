@@ -1,4 +1,6 @@
-package com.room414.hospital.routing.internal;
+package com.room414.hospital.anotations;
+
+import com.room414.hospital.routing.internal.HttpMethod;
 
 import java.lang.annotation.*;
 

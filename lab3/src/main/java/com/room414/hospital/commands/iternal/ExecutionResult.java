@@ -2,14 +2,15 @@ package com.room414.hospital.commands.iternal;
 
 import lombok.Value;
 
-@Value
+@Value(staticConstructor = "of")
 public class ExecutionResult {
     private String path;
     private int statusCode;
     private Type type;
 
-    private enum Type {
+    public enum Type {
         REDIRECT,
-        FORWARD
+        FORWARD,
+        ERROR
     }
 }

@@ -6,5 +6,5 @@ public interface RowMapper<T> {
 
     T map(ResultSet resultSet);
 
-    boolean supportsClass(Class<?> clazz);
+    Class<T> support();
 }

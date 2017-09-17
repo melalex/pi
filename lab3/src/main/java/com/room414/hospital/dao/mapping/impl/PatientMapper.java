@@ -29,7 +29,7 @@ public class PatientMapper extends RowMapperSupport<Patient> {
     }
 
     @Override
-    public boolean supportsClass(Class<?> clazz) {
-        return Patient.class.equals(clazz);
+    public Class<Patient> support() {
+        return Patient.class;
     }
 }

@@ -1,35 +1,27 @@
 package com.room414.hospital.dao.mapping.providers.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.dao.mapping.RowMapper;
-import com.room414.hospital.dao.mapping.impl.ApplicationUserMapper;
-import com.room414.hospital.dao.mapping.impl.DoctorMapper;
-import com.room414.hospital.dao.mapping.impl.DutyMapper;
-import com.room414.hospital.dao.mapping.impl.PatientMapper;
 import com.room414.hospital.dao.mapping.providers.MappingProvider;
 import com.room414.hospital.exceptions.MappingException;
 
-public class MappingProviderImpl implements MappingProvider {
+import java.util.Map;
+import java.util.Objects;
 
-    private final ApplicationUserMapper userMapper = new ApplicationUserMapper();
-    private final DoctorMapper doctorMapper = new DoctorMapper(userMapper);
-    private final DutyMapper dutyMapper = new DutyMapper(doctorMapper);
-    private final PatientMapper patientMapper = new PatientMapper(doctorMapper);
+public class MappingProviderImpl implements MappingProvider {
+    private Map<Class<?>, RowMapper<?>> mappers = ApplicationContext.getInstance().getMappers();
 
     @Override
     public <T> RowMapper<T> provide(Class<T> clazz) {
-        if (userMapper.supportsClass(clazz)) {
-            return cast(userMapper);
-        } else if (doctorMapper.supportsClass(clazz)) {
-            return cast(doctorMapper);
-        } else if (dutyMapper.supportsClass(clazz)) {
-            return cast(dutyMapper);
-        } else if (patientMapper.supportsClass(clazz)) {
-            return cast(patientMapper);
-        } else {
+        RowMapper<T> rowMapper = cast(mappers.get(clazz));
+
+        if (Objects.isNull(rowMapper)) {
             String message = String.format("No RowMapper registered for %s class", clazz);
 
             throw new MappingException(message);
         }
+
+        return rowMapper;
     }
 
     @SuppressWarnings("unchecked")
