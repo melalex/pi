@@ -1,13 +1,12 @@
 package com.room414.hospital.services.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.dao.ApplicationUserDao;
 import com.room414.hospital.forms.AuthenticationForm;
 import com.room414.hospital.services.UserService;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private ApplicationUserDao applicationUserDao;
+    private final ApplicationUserDao applicationUserDao = ApplicationContext.getInstance().getApplicationUserDao();
 
     @Override
     public boolean isUserExists(String username) {

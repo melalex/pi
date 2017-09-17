@@ -1,32 +1,33 @@
 package com.room414.hospital.services.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.converters.Converter;
 import com.room414.hospital.dao.DoctorDao;
 import com.room414.hospital.domain.Pageable;
 import com.room414.hospital.domain.entities.Doctor;
 import com.room414.hospital.domain.internal.DoctorCriteria;
 import com.room414.hospital.domain.internal.Page;
-import com.room414.hospital.exceptions.NotFoundException;
 import com.room414.hospital.forms.AccountForm;
 import com.room414.hospital.services.DoctorService;
 import com.room414.hospital.utils.ErrorUtils;
 import com.room414.hospital.validators.Validator;
-import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 import static com.room414.hospital.utils.PaginationUtils.withCount;
 
-@AllArgsConstructor
+@Slf4j
 public class DoctorServiceImpl implements DoctorService {
-    private DoctorDao doctorDao;
-    private Validator<AccountForm> accountFormValidator;
-    private Converter<AccountForm, Doctor> doctorConverter;
+    private final DoctorDao doctorDao = ApplicationContext.getInstance().getDoctorDao();
+    private final Validator<AccountForm> accountFormValidator = ApplicationContext.getInstance().getAccountFormValidator();
+    private final Converter<AccountForm, Doctor> doctorConverter = ApplicationContext.getInstance().getAccountFormConverter();
 
     @Override
     public void create(AccountForm form) {
         accountFormValidator.validate(form);
         doctorDao.create(doctorConverter.convert(form));
+        log.info("Create new Account {}", form);
     }
 
     @Override

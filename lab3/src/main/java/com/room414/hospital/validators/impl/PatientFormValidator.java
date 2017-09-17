@@ -1,15 +1,14 @@
 package com.room414.hospital.validators.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.forms.PatientForm;
 import com.room414.hospital.services.DoctorService;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-@AllArgsConstructor
 public class PatientFormValidator extends ValidatorSupport<PatientForm> {
     private static final String DOCTOR_IS_EMPTY = "errors.validation.doctor.empty";
     private static final String DOCTOR_NOT_FOUND = "errors.validation.doctor.notFound";
@@ -17,8 +16,7 @@ public class PatientFormValidator extends ValidatorSupport<PatientForm> {
     private static final String FIRST_NAME_IS_EMPTY = "errors.validation.firstName.empty";
     private static final String LAST_NAME_IS_EMPTY = "errors.validation.lastName.empty";
 
-
-    private DoctorService doctorService;
+    private final DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
 
     @Override
     protected void validate(PatientForm object, List<String> errorCodes) {

@@ -1,3 +1,5 @@
+DROP SCHEMA IF EXISTS `hospital`;
+
 CREATE SCHEMA `hospital`
   DEFAULT CHARACTER SET utf8;
 

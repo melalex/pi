@@ -1,4 +1,4 @@
-package com.room414.hospital.dao.util;
+package com.room414.hospital.utils;
 
 import lombok.experimental.UtilityClass;
 

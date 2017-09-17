@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>front</servlet-name>
+        <servlet-class>com.room414.hospital.DispatcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>front</servlet-name>
+        <url-pattern>/site/*</url-pattern>
+    </servlet-mapping>
+
+
+    <filter>
+        <filter-name>CharFilter</filter-name>
+        <filter-class>com.room414.hospital.filters.CharsEncoderFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>com.room414.hospital.filters.LocaleFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>auth</filter-name>
+        <filter-class>com.room414.hospital.filters.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>auth</filter-name>
+        <url-pattern>/site/user/*</url-pattern>
+        <url-pattern>/site/admin/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/errors/invalidPagePath.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/views/errors/internalServerError.jsp</location>
+    </error-page>
+
+</web-app>

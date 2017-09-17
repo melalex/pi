@@ -1,15 +1,14 @@
 package com.room414.hospital.validators.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.forms.AccountForm;
 import com.room414.hospital.services.UserService;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 
-@AllArgsConstructor
 public class AccountFormValidator extends ValidatorSupport<AccountForm> {
     private static final String USER_ALREADY_EXISTS = "errors.validation.userName.alreadyExists";
     private static final String USERNAME_IS_EMPTY = "errors.validation.userName.empty";
@@ -24,7 +23,7 @@ public class AccountFormValidator extends ValidatorSupport<AccountForm> {
 
     private static final int PASSWORD_MIN_LENGTH = 4;
 
-    private UserService userService;
+    private final UserService userService = ApplicationContext.getInstance().getUserService();
 
     @Override
     protected void validate(AccountForm object, List<String> errorCodes) {

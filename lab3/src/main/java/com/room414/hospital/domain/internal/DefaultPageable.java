@@ -4,8 +4,11 @@ import com.room414.hospital.domain.Pageable;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.io.Serializable;
+
 @Data(staticConstructor = "of")
-public class DefaultPageable implements Pageable {
+public class DefaultPageable implements Pageable, Serializable {
+    private static final long serialVersionUID = 3274327579533485420L;
 
     @NonNull
     private int limit;

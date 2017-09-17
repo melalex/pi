@@ -7,7 +7,7 @@ import com.room414.hospital.forms.DutyForm;
 
 public interface DutyService {
 
-    void create(DutyForm duty);
+    void create(DutyForm form);
 
     Page<Duty> findByLastName(String lastName, Pageable pageable);
 }

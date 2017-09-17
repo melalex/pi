@@ -5,7 +5,7 @@ import com.room414.hospital.domain.entities.Patient;
 import com.room414.hospital.forms.PatientForm;
 import com.room414.hospital.utils.ConversionUtil;
 
-public class PatientConverter implements Converter<PatientForm, Patient> {
+public class PatientFormConverter implements Converter<PatientForm, Patient> {
 
     @Override
     public Patient convert(PatientForm source) {

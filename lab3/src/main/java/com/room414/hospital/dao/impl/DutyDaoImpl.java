@@ -1,19 +1,17 @@
 package com.room414.hospital.dao.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.dao.DutyDao;
 import com.room414.hospital.dao.mapping.RowExtractor;
 import com.room414.hospital.dao.mapping.impl.CountExtractor;
 import com.room414.hospital.dao.query.QueryTemplate;
-import com.room414.hospital.dao.util.SqlUtil;
 import com.room414.hospital.domain.Pageable;
-import com.room414.hospital.domain.entities.ApplicationUser;
 import com.room414.hospital.domain.entities.Duty;
-import lombok.AllArgsConstructor;
+import com.room414.hospital.utils.SqlUtil;
 import org.intellij.lang.annotations.Language;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class DutyDaoImpl implements DutyDao {
     // @formatter:off
 
@@ -40,7 +38,7 @@ public class DutyDaoImpl implements DutyDao {
 
     // @formatter:on
 
-    private QueryTemplate queryTemplate;
+    private final QueryTemplate queryTemplate = ApplicationContext.getInstance().getQueryTemplate();
 
     private final RowExtractor<Integer> countExtractor = new CountExtractor();
 

@@ -1,22 +1,19 @@
 package com.room414.hospital.dao.impl;
 
-import com.room414.hospital.dao.DoctorDao;
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.dao.ApplicationUserDao;
+import com.room414.hospital.dao.DoctorDao;
 import com.room414.hospital.dao.mapping.RowExtractor;
 import com.room414.hospital.dao.mapping.impl.CountExtractor;
 import com.room414.hospital.dao.query.QueryTemplate;
 import com.room414.hospital.domain.Pageable;
 import com.room414.hospital.domain.entities.Doctor;
-import com.room414.hospital.domain.entities.Secession;
 import com.room414.hospital.domain.internal.DoctorCriteria;
-import lombok.AllArgsConstructor;
 import org.intellij.lang.annotations.Language;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 public class DoctorDaoImpl implements DoctorDao {
     // @formatter:off
 
@@ -58,8 +55,8 @@ public class DoctorDaoImpl implements DoctorDao {
 
     // @formatter:on
 
-    private QueryTemplate queryTemplate;
-    private ApplicationUserDao applicationUserDao;
+    private final QueryTemplate queryTemplate = ApplicationContext.getInstance().getQueryTemplate();
+    private final ApplicationUserDao applicationUserDao = ApplicationContext.getInstance().getApplicationUserDao();
 
     private final RowExtractor<Integer> countExtractor = new CountExtractor();
 

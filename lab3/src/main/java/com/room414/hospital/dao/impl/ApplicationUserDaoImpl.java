@@ -1,14 +1,13 @@
 package com.room414.hospital.dao.impl;
 
+import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.dao.ApplicationUserDao;
 import com.room414.hospital.dao.query.QueryTemplate;
 import com.room414.hospital.domain.entities.ApplicationUser;
-import lombok.AllArgsConstructor;
 import org.intellij.lang.annotations.Language;
 
 import java.util.Optional;
 
-@AllArgsConstructor
 public class ApplicationUserDaoImpl implements ApplicationUserDao {
     // @formatter:off
 
@@ -31,7 +30,7 @@ public class ApplicationUserDaoImpl implements ApplicationUserDao {
 
     // @formatter:on
 
-    private QueryTemplate queryTemplate;
+    private final QueryTemplate queryTemplate = ApplicationContext.getInstance().getQueryTemplate();
 
     @Override
     public void create(ApplicationUser applicationUser) {
