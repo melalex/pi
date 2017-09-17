@@ -2,6 +2,7 @@ package com.room414.hospital.filters;
 
 import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.routing.Router;
+import com.room414.hospital.utils.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -11,8 +12,6 @@ import java.io.IOException;
 
 @Slf4j
 public class AuthFilter implements Filter {
-    private final static String USER_ATTR = "applicationUser";
-
     private final Router router = ApplicationContext.getInstance().getRouter();
 
     @Override
@@ -39,6 +38,6 @@ public class AuthFilter implements Filter {
     }
 
     private boolean isUserLoggedIn(HttpServletRequest request) {
-        return request.getSession().getAttribute(USER_ATTR) != null;
+        return request.getSession().getAttribute(SessionUtil.USER_ATTR) != null;
     }
 }

@@ -23,6 +23,9 @@ class ServicesContext {
     private final LocaleService localeService = new LocaleServiceImpl();
 
     @Getter(lazy = true)
+    private final MessageService messageService = new MessageServiceImpl();
+
+    @Getter(lazy = true)
     private final PatientService patientService = new PatientServiceImpl();
 
     @Getter(lazy = true)
@@ -31,7 +34,7 @@ class ServicesContext {
     @Getter(lazy = true)
     private final Map<String, Locale> supportedLocales = loadSupportedLocales();
 
-    @Getter
+    @Getter(lazy = true)
     private final Locale defaultLocale = Locale.US;
 
     private Map<String, Locale> loadSupportedLocales() {

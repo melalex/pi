@@ -1,6 +1,7 @@
 package com.room414.hospital.handlers.impl;
 
 import com.room414.hospital.commands.iternal.ExecutionResult;
+import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.handlers.ExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +19,6 @@ public class DefaultExceptionHandler implements ExceptionHandler<Throwable> {
 
         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
-        return ExecutionResult.of("/error", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ExecutionResult.Type.ERROR);
+        return ExecutionResult.of(Views.ERROR, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ExecutionResult.Type.ERROR);
     }
 }

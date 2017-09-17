@@ -1,5 +1,6 @@
 package com.room414.hospital.dao.query.builder;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.room414.hospital.dao.query.BuildCallback;
 import com.room414.hospital.domain.Identifiable;
@@ -7,6 +8,7 @@ import com.room414.hospital.domain.Pageable;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+@Slf4j
 @RequiredArgsConstructor
 public class QueryBuilder<T> {
 
@@ -65,6 +68,14 @@ public class QueryBuilder<T> {
     private T execute(Object param, Object... params) {
         checkArgument(isNotBlank(sql), "Query can't be Blank");
 
+        log.debug("Execute query {} with params: {}", sql, asString(param, params));
+
         return callback.onBuild(sql, param, params);
     }
+
+    private String asString(Object param, Object[] params) {
+        return Joiner.on(", ").join(Lists.asList(param, params));
+    }
+
+
 }

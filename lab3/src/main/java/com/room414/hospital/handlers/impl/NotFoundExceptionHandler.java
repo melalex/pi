@@ -1,0 +1,27 @@
+package com.room414.hospital.handlers.impl;
+
+import com.room414.hospital.anotations.Handler;
+import com.room414.hospital.commands.iternal.ExecutionResult;
+import com.room414.hospital.commands.iternal.Views;
+import com.room414.hospital.exceptions.NotFoundException;
+import com.room414.hospital.handlers.ExceptionHandler;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Slf4j
+@Handler(NotFoundException.class)
+public class NotFoundExceptionHandler implements ExceptionHandler<NotFoundException> {
+
+    @Override
+    public ExecutionResult handle(NotFoundException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.debug("{} Not Found", request.getRequestURI());
+
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+        return ExecutionResult.of(Views.ERROR, HttpServletResponse.SC_NOT_FOUND, ExecutionResult.Type.ERROR);
+    }
+}
