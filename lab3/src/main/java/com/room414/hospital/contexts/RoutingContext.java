@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.room414.hospital.anotations.Route;
 import com.room414.hospital.commands.Command;
 import com.room414.hospital.commands.iternal.DefaultCommand;
+import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.exceptions.StartUpException;
 import com.room414.hospital.routing.Router;
 import com.room414.hospital.routing.impl.RouterImpl;
@@ -29,7 +30,17 @@ class RoutingContext {
     private final Command defaultCommand = new DefaultCommand();
 
     @Getter(lazy = true)
+    private final Map<String, String> jspRoutes = loadJspRoutes();
+
+    @Getter(lazy = true)
     private final Map<RouteValue, Command> routes = loadRoutes();
+
+    private Map<String, String> loadJspRoutes() {
+        return ImmutableMap.<String, String>builder()
+                .put("/site/login", Views.SIGN_IN)
+                .put("/site/join", Views.SIGN_UP)
+                .build();
+    }
 
     private Map<RouteValue, Command> loadRoutes() {
         Reflections reflections = new Reflections(COMMANDS_PACKAGE);

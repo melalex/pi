@@ -18,10 +18,10 @@ public class NotFoundExceptionHandler implements ExceptionHandler<NotFoundExcept
 
     @Override
     public ExecutionResult handle(NotFoundException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("{} Not Found", request.getRequestURI());
+        log.error("Not Found", exception);
 
         response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
-        return ExecutionResult.of(Views.ERROR, HttpServletResponse.SC_NOT_FOUND, ExecutionResult.Type.ERROR);
+        return ExecutionResult.of(Views.NOT_FOUND, HttpServletResponse.SC_NOT_FOUND, ExecutionResult.Type.ERROR);
     }
 }
