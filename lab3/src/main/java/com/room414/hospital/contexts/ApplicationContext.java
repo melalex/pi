@@ -32,6 +32,9 @@ public class ApplicationContext {
     @Delegate
     private final HandlersContext handlersContext = new HandlersContext();
 
+    @Delegate
+    private final ResolversContext resolversContext = new ResolversContext();
+
     public static ApplicationContext getInstance() {
         return ourInstance;
     }

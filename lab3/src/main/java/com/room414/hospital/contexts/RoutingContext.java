@@ -21,7 +21,7 @@ import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 class RoutingContext {
-    private final static String COMMANDS_PACKAGE = "com.room414.hospital.commands.impl";
+    private final static String COMMANDS_PACKAGE = "com.room414.hospital.commands";
 
     @Getter(lazy = true)
     private final Router router = new RouterImpl();
