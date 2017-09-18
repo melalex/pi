@@ -8,6 +8,7 @@ import com.room414.hospital.routing.internal.RouteValue;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
@@ -20,5 +21,14 @@ public class RouterImpl implements Router {
         log.debug("Request for {}:{}", method, path);
 
         return routes.getOrDefault(RouteValue.of(method, path), notFound);
+    }
+
+    @Override
+    public void redirect(String to, HttpServletResponse response) throws IOException {
+        String url = DISPATCHER_SERVLET_MAPPING + to;
+
+        log.debug("Redirect to");
+
+        response.sendRedirect(url);
     }
 }

@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class SelectTemplateImpl<T> extends JdbcSupport<List<T>> implements SelectTemplate<T> {
+public class SelectTemplateImpl<T> extends AbstractTemplate<List<T>> implements SelectTemplate<T> {
     private final RowMapper<T> rowMapper;
 
     public SelectTemplateImpl(Connection connection, RowMapper<T> rowMapper) {

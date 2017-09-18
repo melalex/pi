@@ -9,7 +9,7 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 
-public class AccountFormValidator extends ValidatorSupport<AccountForm> {
+public class AccountFormValidator extends AbstractValidator<AccountForm> {
     private static final String USER_ALREADY_EXISTS = "errors.validation.userName.alreadyExists";
     private static final String USERNAME_IS_EMPTY = "errors.validation.userName.empty";
 

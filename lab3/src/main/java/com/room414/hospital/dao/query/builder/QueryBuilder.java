@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.room414.hospital.dao.query.BuildCallback;
 import com.room414.hospital.domain.Identifiable;
 import com.room414.hospital.domain.Pageable;
+import com.room414.hospital.utils.SqlUtil;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -68,14 +69,8 @@ public class QueryBuilder<T> {
     private T execute(Object param, Object... params) {
         checkArgument(isNotBlank(sql), "Query can't be Blank");
 
-        log.debug("Execute query {} with params: {}", sql, asString(param, params));
+        log.debug("Execute query {}", SqlUtil.sqlFormat(sql, Lists.asList(param, params)));
 
         return callback.onBuild(sql, param, params);
     }
-
-    private String asString(Object param, Object[] params) {
-        return Joiner.on(", ").join(Lists.asList(param, params));
-    }
-
-
 }

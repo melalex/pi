@@ -1,6 +1,7 @@
 package com.room414.hospital.dao.jdbc.impl;
 
 import com.room414.hospital.exceptions.JdbcException;
+import com.room414.hospital.utils.SqlUtil;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @AllArgsConstructor
-public abstract class JdbcSupport<T> implements AutoCloseable {
+public abstract class AbstractTemplate<T> implements AutoCloseable {
     private final Connection connection;
 
     T query(String sql, Object... params) {
@@ -17,7 +18,7 @@ public abstract class JdbcSupport<T> implements AutoCloseable {
 
             return executeQuery(statement);
         } catch (SQLException e) {
-            String message = String.format("Exception during calling procedure '%s'", sqlFormat(sql, params));
+            String message = String.format("Exception during calling procedure '%s'", SqlUtil.sqlFormat(sql, params));
 
             throw new JdbcException(message, e);
         }
@@ -25,19 +26,10 @@ public abstract class JdbcSupport<T> implements AutoCloseable {
 
     protected abstract T executeQuery(PreparedStatement statement) throws SQLException;
 
-
     private void setValues(PreparedStatement preparedStatement, Object... values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
             preparedStatement.setObject(i + 1, values[i]);
         }
-    }
-
-    private String sqlFormat(String sqlPattern, Object... arguments) {
-        String sqlStatement = sqlPattern
-                .replaceAll("\\?", "%s")
-                .replaceAll("\\s+", " ");
-
-        return String.format(sqlStatement, arguments);
     }
 
     public void commit() {

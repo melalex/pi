@@ -1,2 +1,2 @@
 <script src="${pageContext.request.contextPath}/webjars/jquery/3.2.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/webjars/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>

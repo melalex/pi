@@ -6,7 +6,7 @@ import com.room414.hospital.exceptions.JdbcException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class RowExtractorSupport<T> implements RowExtractor<T> {
+public abstract class AbstractRowExtractor<T> implements RowExtractor<T> {
 
     @Override
     public T extract(ResultSet resultSet) {

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @AllArgsConstructor
-public class DutyMapper extends RowMapperSupport<Duty> {
+public class DutyMapper extends AbstractRowMapper<Duty> {
     private static final String ID_COLUMN = "duty.id";
     private static final String DATE_COLUMN = "duty.date";
 

@@ -6,7 +6,7 @@ import com.room414.hospital.dao.mapping.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class RowMapperSupport<T> implements RowMapper<T> {
+public abstract class AbstractRowMapper<T> implements RowMapper<T> {
 
     @Override
     public T map(ResultSet resultSet) {

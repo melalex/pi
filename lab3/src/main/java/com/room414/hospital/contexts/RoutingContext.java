@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.room414.hospital.anotations.Route;
 import com.room414.hospital.commands.Command;
-import com.room414.hospital.commands.impl.DefaultCommand;
+import com.room414.hospital.commands.iternal.DefaultCommand;
 import com.room414.hospital.exceptions.StartUpException;
 import com.room414.hospital.routing.Router;
 import com.room414.hospital.routing.impl.RouterImpl;
@@ -39,10 +39,14 @@ class RoutingContext {
         for (Class<?> commandClass : commandClasses) {
             Route route = commandClass.getAnnotation(Route.class);
             Command command = byClass(commandClass);
-            result.put(RouteValue.of(route.method(), route.path()), command);
+            result.put(toRouteValue(route), command);
         }
 
         return ImmutableMap.copyOf(result);
+    }
+
+    private RouteValue toRouteValue(Route route) {
+        return RouteValue.of(route.method(), Router.DISPATCHER_SERVLET_MAPPING + route.path());
     }
 
     private Command byClass(Class<?> clazz) {

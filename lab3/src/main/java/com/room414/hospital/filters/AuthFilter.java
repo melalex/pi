@@ -24,10 +24,16 @@ public class AuthFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
         if (!isUserLoggedIn(httpRequest)) {
+            log.debug("Access denied for page: {}", httpRequest.getRequestURI());
+
             HttpServletResponse httpResponse = ((HttpServletResponse) response);
-            router.route("/login").execute(httpRequest, httpResponse);
-            log.info("Access denied for page: {}", httpRequest.getRequestURI());
+
+            router.redirect("/login", httpResponse);
+
+            return;
         }
+
+        log.debug("Access allowed for page: {}", httpRequest.getRequestURI());
 
         chain.doFilter(request, response);
     }

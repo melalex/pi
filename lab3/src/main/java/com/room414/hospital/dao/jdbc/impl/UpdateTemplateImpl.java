@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UpdateTemplateImpl extends JdbcSupport<Integer> implements UpdateTemplate {
+public class UpdateTemplateImpl extends AbstractTemplate<Integer> implements UpdateTemplate {
 
     public UpdateTemplateImpl(Connection connection) {
         super(connection);

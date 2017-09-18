@@ -9,7 +9,7 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class PatientFormValidator extends ValidatorSupport<PatientForm> {
+public class PatientFormValidator extends AbstractValidator<PatientForm> {
     private static final String DOCTOR_IS_EMPTY = "errors.validation.doctor.empty";
     private static final String DOCTOR_NOT_FOUND = "errors.validation.doctor.notFound";
 

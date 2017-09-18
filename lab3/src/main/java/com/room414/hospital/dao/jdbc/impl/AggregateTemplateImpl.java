@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AggregateTemplateImpl<T> extends JdbcSupport<T> implements AggregateTemplate<T> {
+public class AggregateTemplateImpl<T> extends AbstractTemplate<T> implements AggregateTemplate<T> {
     private final RowExtractor<T> rowExtractor;
 
     public AggregateTemplateImpl(Connection connection, RowExtractor<T> rowExtractor) {

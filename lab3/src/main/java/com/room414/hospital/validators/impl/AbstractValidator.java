@@ -6,7 +6,7 @@ import com.room414.hospital.validators.Validator;
 
 import java.util.List;
 
-public abstract class ValidatorSupport<T> implements Validator<T> {
+public abstract class AbstractValidator<T> implements Validator<T> {
 
     @Override
     public void validate(T object) {

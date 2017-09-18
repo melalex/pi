@@ -1,4 +1,4 @@
-package com.room414.hospital.commands.impl;
+package com.room414.hospital.commands.iternal;
 
 import com.room414.hospital.commands.Command;
 import com.room414.hospital.handlers.provider.ExceptionHandlerProvider;

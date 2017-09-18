@@ -5,11 +5,11 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>front</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <servlet-class>com.room414.hospital.DispatcherServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>front</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>/site/*</url-pattern>
     </servlet-mapping>
 
@@ -43,8 +43,7 @@
 
     <filter-mapping>
         <filter-name>auth</filter-name>
-        <url-pattern>/site/user/*</url-pattern>
-        <url-pattern>/site/admin/*</url-pattern>
+        <url-pattern>/site/*</url-pattern>
     </filter-mapping>
 
     <error-page>

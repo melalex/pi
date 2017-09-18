@@ -1,4 +1,4 @@
-package com.room414.hospital.commands.impl;
+package com.room414.hospital.commands.iternal;
 
 import com.room414.hospital.commands.Command;
 
