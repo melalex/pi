@@ -6,5 +6,5 @@ public interface UserService {
 
     boolean isUserExists(String username);
 
-    boolean tryAuthenticate(AuthenticationForm form);
+    void tryAuthenticate(AuthenticationForm form);
 }

@@ -23,9 +23,6 @@ class ServicesContext {
     private final LocaleService localeService = new LocaleServiceImpl();
 
     @Getter(lazy = true)
-    private final MessageService messageService = new MessageServiceImpl();
-
-    @Getter(lazy = true)
     private final PatientService patientService = new PatientServiceImpl();
 
     @Getter(lazy = true)

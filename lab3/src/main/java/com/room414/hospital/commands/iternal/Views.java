@@ -9,6 +9,8 @@ public class Views {
     public static final String ERROR = VIEWS_LOCATION + "errors/internalServerError.jsp";
     public static final String NOT_FOUND = VIEWS_LOCATION + "errors/notFound.jsp";
 
+    public static final String HOME = "";
+
     public static final String SIGN_IN = VIEWS_LOCATION + "signIn.jsp";
     public static final String SIGN_UP = VIEWS_LOCATION + "signUp.jsp";
 }
