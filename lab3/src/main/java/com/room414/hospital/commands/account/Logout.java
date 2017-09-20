@@ -3,6 +3,7 @@ package com.room414.hospital.commands.account;
 import com.room414.hospital.anotations.Route;
 import com.room414.hospital.commands.iternal.AbstractCommand;
 import com.room414.hospital.commands.iternal.ExecutionResult;
+import com.room414.hospital.commands.iternal.Routes;
 import com.room414.hospital.routing.internal.HttpMethod;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Route(method = HttpMethod.GET, path = "/logout")
+@Route(method = HttpMethod.GET, path = Routes.LOGOUT)
 public class Logout extends AbstractCommand {
 
     @Override

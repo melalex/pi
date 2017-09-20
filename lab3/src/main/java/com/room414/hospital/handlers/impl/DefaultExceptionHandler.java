@@ -17,6 +17,10 @@ public class DefaultExceptionHandler implements ExceptionHandler<Throwable> {
     public ExecutionResult handle(Throwable exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.error("Unexpected exception", exception);
 
-        return ExecutionResult.of(Views.ERROR, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ExecutionResult.Type.ERROR);
+        return ExecutionResult.builder()
+                .path(Views.ERROR)
+                .statusCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
+                .type(ExecutionResult.Type.ERROR)
+                .build();
     }
 }

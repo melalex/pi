@@ -3,6 +3,7 @@ package com.room414.hospital.commands.account;
 import com.room414.hospital.anotations.Route;
 import com.room414.hospital.commands.iternal.AbstractCommand;
 import com.room414.hospital.commands.iternal.ExecutionResult;
+import com.room414.hospital.commands.iternal.Routes;
 import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.domain.entities.Doctor;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Route(method = HttpMethod.POST, path = "/login")
+@Route(method = HttpMethod.POST, path = Routes.SIGN_IN)
 public class PostSignIn extends AbstractCommand {
     private ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
     private UserService userService = ApplicationContext.getInstance().getUserService();
@@ -26,7 +27,8 @@ public class PostSignIn extends AbstractCommand {
 
     @Override
     protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AuthenticationForm form = resolverProvider.provide(AuthenticationForm.class).resolve(request);
+        AuthenticationForm form = resolverProvider.provide(AuthenticationForm.class)
+                .resolve(request);
 
         userService.tryAuthenticate(form);
 
@@ -34,6 +36,6 @@ public class PostSignIn extends AbstractCommand {
 
         request.getSession().setAttribute(SessionUtil.USER_ATTR, doctor);
 
-        return ExecutionResult.of(Views.HOME, HttpServletResponse.SC_OK, ExecutionResult.Type.REDIRECT);
+        return ExecutionResult.redirectTo(Routes.HOME);
     }
 }

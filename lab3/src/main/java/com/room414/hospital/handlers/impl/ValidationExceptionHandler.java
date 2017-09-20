@@ -20,7 +20,11 @@ public class ValidationExceptionHandler implements ExceptionHandler<ValidationEx
     public ExecutionResult handle(ValidationException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute(Attributes.ERRORS, exception.getErrorCodes());
 
-        return ExecutionResult.of(form(request), HttpServletResponse.SC_NOT_ACCEPTABLE, ExecutionResult.Type.FORWARD);
+        return ExecutionResult.builder()
+                .path(form(request))
+                .statusCode(HttpServletResponse.SC_NOT_ACCEPTABLE)
+                .type(ExecutionResult.Type.FORWARD)
+                .build();
     }
 
     private String form(HttpServletRequest request) {

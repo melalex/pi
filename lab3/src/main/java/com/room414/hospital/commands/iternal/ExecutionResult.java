@@ -1,10 +1,15 @@
 package com.room414.hospital.commands.iternal;
 
-import lombok.Value;
+import lombok.Builder;
+import lombok.Getter;
 
-@Value(staticConstructor = "of")
+import javax.servlet.http.HttpServletResponse;
+
+@Getter
+@Builder
 public class ExecutionResult {
     private String path;
+    private Object model;
     private int statusCode;
     private Type type;
 
@@ -12,5 +17,13 @@ public class ExecutionResult {
         REDIRECT,
         FORWARD,
         ERROR
+    }
+
+    public static ExecutionResult redirectTo(String path) {
+        return ExecutionResult.builder()
+                .path(path)
+                .statusCode(HttpServletResponse.SC_OK)
+                .type(Type.REDIRECT)
+                .build();
     }
 }

@@ -25,6 +25,10 @@ public class UserNotFoundExceptionHandler implements ExceptionHandler<UserNotFou
 
         request.setAttribute(Attributes.ERRORS, ImmutableList.of(USER_NOT_FOUND));
 
-        return ExecutionResult.of(Views.SIGN_IN, HttpServletResponse.SC_NOT_FOUND, ExecutionResult.Type.FORWARD);
+        return ExecutionResult.builder()
+                .path(Views.SIGN_IN)
+                .statusCode(HttpServletResponse.SC_NOT_FOUND)
+                .type(ExecutionResult.Type.FORWARD)
+                .build();
     }
 }

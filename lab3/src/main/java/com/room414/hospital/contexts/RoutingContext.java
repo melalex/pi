@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.room414.hospital.anotations.Route;
 import com.room414.hospital.commands.Command;
 import com.room414.hospital.commands.iternal.DefaultCommand;
+import com.room414.hospital.commands.iternal.Routes;
 import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.exceptions.StartUpException;
 import com.room414.hospital.routing.Router;
@@ -37,8 +38,8 @@ class RoutingContext {
 
     private Map<String, String> loadJspRoutes() {
         return ImmutableMap.<String, String>builder()
-                .put("/site/login", Views.SIGN_IN)
-                .put("/site/join", Views.SIGN_UP)
+                .put(toServletRoute(Routes.SIGN_IN), Views.SIGN_IN)
+                .put(toServletRoute(Routes.SIGN_UP), Views.SIGN_UP)
                 .build();
     }
 
@@ -57,7 +58,11 @@ class RoutingContext {
     }
 
     private RouteValue toRouteValue(Route route) {
-        return RouteValue.of(route.method(), Router.DISPATCHER_SERVLET_MAPPING + route.path());
+        return RouteValue.of(route.method(), toServletRoute(route.path()));
+    }
+
+    private String toServletRoute(String route) {
+        return Router.DISPATCHER_SERVLET_MAPPING + route;
     }
 
     private Command byClass(Class<?> clazz) {

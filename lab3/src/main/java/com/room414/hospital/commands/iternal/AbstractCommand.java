@@ -29,6 +29,7 @@ public abstract class AbstractCommand implements Command {
         response.setStatus(executionResult.getStatusCode());
 
         if (ExecutionResult.Type.FORWARD.equals(executionResult.getType())) {
+            request.setAttribute(Attributes.MODEL, executionResult.getModel());
             request.getRequestDispatcher(executionResult.getPath())
                     .forward(request, response);
         } else if (ExecutionResult.Type.REDIRECT.equals(executionResult.getType())) {
