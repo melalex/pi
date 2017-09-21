@@ -18,7 +18,7 @@ public abstract class AbstractCommand implements Command {
         ExecutionResult executionResult;
 
         try {
-            request.setAttribute(Attributes.FORM_VIEW, currentView());
+            request.setAttribute(Attributes.PREVIOUS_VIEW, rollbackView());
 
             executionResult = doExecute(request, response);
         } catch (Throwable throwable) {
@@ -39,9 +39,7 @@ public abstract class AbstractCommand implements Command {
         }
     }
 
-    private String currentView() {
-        return Views.HOME;
-    }
-
     protected abstract ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+    protected abstract String rollbackView();
 }

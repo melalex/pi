@@ -34,8 +34,13 @@ public class PostSignIn extends AbstractCommand {
 
         Doctor doctor = doctorService.findByUsername(form.getUsername());
 
-        request.getSession().setAttribute(SessionUtil.USER_ATTR, doctor);
+        SessionUtil.saveUser(request, doctor);
 
         return ExecutionResult.redirectTo(Routes.HOME);
+    }
+
+    @Override
+    protected String rollbackView() {
+        return Views.SIGN_IN;
     }
 }

@@ -18,6 +18,6 @@ public class AuthenticationFormResolver implements ArgumentResolver<Authenticati
         authenticationForm.setUsername(request.getParameter(USERNAME_PARAM));
         authenticationForm.setPassword(request.getParameter(PASSWORD_PARAM));
 
-        return null;
+        return authenticationForm;
     }
 }

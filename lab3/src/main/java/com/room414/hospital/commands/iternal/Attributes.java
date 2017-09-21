@@ -6,5 +6,5 @@ import lombok.experimental.UtilityClass;
 public class Attributes {
     public static final String ERRORS = "errors";
     public static final String MODEL = "model";
-    public static final String FORM_VIEW = "form";
+    public static final String PREVIOUS_VIEW = "form";
 }

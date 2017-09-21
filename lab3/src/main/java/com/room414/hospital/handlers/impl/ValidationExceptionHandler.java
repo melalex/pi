@@ -28,6 +28,6 @@ public class ValidationExceptionHandler implements ExceptionHandler<ValidationEx
     }
 
     private String form(HttpServletRequest request) {
-        return (String) request.getAttribute(Attributes.FORM_VIEW);
+        return (String) request.getAttribute(Attributes.PREVIOUS_VIEW);
     }
 }

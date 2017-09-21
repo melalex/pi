@@ -40,6 +40,9 @@ class RoutingContext {
         return ImmutableMap.<String, String>builder()
                 .put(toServletRoute(Routes.SIGN_IN), Views.SIGN_IN)
                 .put(toServletRoute(Routes.SIGN_UP), Views.SIGN_UP)
+                .put(toServletRoute(Routes.CREATE_DOCTOR), Views.DOCTOR)
+                .put(toServletRoute(Routes.CREATE_DUTY), Views.DUTY)
+                .put(toServletRoute(Routes.CREATE_PATIENT), Views.PATIENT)
                 .build();
     }
 
