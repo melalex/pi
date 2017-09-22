@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Route(method = HttpMethod.POST, path = Routes.CREATE_DUTY)
+@Route(method = HttpMethod.POST, path = Routes.DUTY)
 public class PostDuty extends AbstractCommand {
     private final DutyService dutyService = ApplicationContext.getInstance().getDutyService();
     private final ArgumentResolverProvider argumentResolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();

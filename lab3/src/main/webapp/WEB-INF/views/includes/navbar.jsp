@@ -22,5 +22,6 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/site/duties"><fmt:message key="views.navbar.link.duties"/></a>
             </li>
         </ul>
+        <a class="nav-link" href="${pageContext.request.contextPath}/site/logout"><fmt:message key="views.navbar.link.logout"/></a>
     </div>
 </nav>

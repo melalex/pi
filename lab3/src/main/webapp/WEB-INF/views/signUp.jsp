@@ -12,7 +12,6 @@
     <title>Sign Up</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
 <div class="container">
@@ -24,65 +23,65 @@
             </div>
         </div>
         <div class="main-login main-center">
-            <form method="post">
+            <form action="${pageContext.request.contextPath}/site/join" method="post">
 
                 <div class="form-group">
-                    <label for="username" class="col-sm-2"><fmt:message key="views.forms.username"/></label>
+                    <label for="username" class="col-sm-2"><fmt:message key="views.domain.username"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input class="form-control" name="username" id="username"
-                                   placeholder="<fmt:message key="views.forms.username"/>"
-                                   value="<c:out value="${requestScope.form.getUsername()}"/>"/>
+                                   placeholder="<fmt:message key="views.domain.username"/>"
+                                   value="<c:out value="${requestScope.model.getUsername()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="password" class="col-sm-2"><fmt:message key="views.forms.password"/></label>
+                    <label for="password" class="col-sm-2"><fmt:message key="views.domain.password"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input class="form-control" name="password" id="password"
-                                   placeholder="<fmt:message key="views.forms.password"/>"
-                                   value="<c:out value="${requestScope.form.getPassword()}"/>"/>
+                                   placeholder="<fmt:message key="views.domain.password"/>"
+                                   value="<c:out value="${requestScope.model.getPassword()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="retryPassword" class="col-sm-2"><fmt:message key="views.forms.retryPassword"/></label>
+                    <label for="retryPassword" class="col-sm-2"><fmt:message key="views.domain.retryPassword"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input class="form-control" name="retryPassword" id="retryPassword"
-                                   placeholder="<fmt:message key="views.forms.retryPassword"/>"
-                                   value="<c:out value="${requestScope.form.getRetryPassword()}"/>"/>
+                                   placeholder="<fmt:message key="views.domain.retryPassword"/>"
+                                   value="<c:out value="${requestScope.model.getRetryPassword()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-2"><fmt:message key="views.forms.firstName"/></label>
+                    <label for="firstName" class="col-sm-2"><fmt:message key="views.domain.firstName"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input class="form-control" name="firstName" id="firstName"
-                                   placeholder="<fmt:message key="views.forms.firstName"/>"
-                                   value="<c:out value="${requestScope.form.getFirstName()}"/>"/>
+                                   placeholder="<fmt:message key="views.domain.firstName"/>"
+                                   value="<c:out value="${requestScope.model.getFirstName()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName" class="col-sm-2"><fmt:message key="views.forms.lastName"/></label>
+                    <label for="lastName" class="col-sm-2"><fmt:message key="views.domain.lastName"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input class="form-control" name="lastName" id="lastName"
-                                   placeholder="<fmt:message key="views.forms.lastName"/>"
-                                   value="<c:out value="${requestScope.form.getLastName()}" />"/>
+                                   placeholder="<fmt:message key="views.domain.lastName"/>"
+                                   value="<c:out value="${requestScope.model.getLastName()}" />"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="secession" class="col-sm-2"><fmt:message key="views.forms.secession"/></label>
+                    <label for="secession" class="col-sm-2"><fmt:message key="views.domain.secession"/></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <select class="form-control" name="secession" id="secession">

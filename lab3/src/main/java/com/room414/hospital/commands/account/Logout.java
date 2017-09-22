@@ -18,11 +18,11 @@ public class Logout extends AbstractCommand {
     protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         request.getSession().invalidate();
 
-        return ExecutionResult.redirectTo(Routes.HOME);
+        return ExecutionResult.redirectTo(Routes.SIGN_IN);
     }
 
     @Override
     protected String rollbackView() {
-        return Views.HOME;
+        return Views.SIGN_IN;
     }
 }

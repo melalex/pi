@@ -13,6 +13,7 @@ public class Routes {
     public static final String PATIENTS_LIST = "/patients";
 
     public static final String DOCTOR = "/doctor";
+    public static final String DUTY = "/duty";
     public static final String PATIENT = "/patient";
 
     public static final String CREATE_DUTY = "/duty/create";
