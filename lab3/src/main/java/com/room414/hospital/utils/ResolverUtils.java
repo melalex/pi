@@ -22,19 +22,11 @@ public class ResolverUtils {
         }
     }
 
-    public int parseInteger(String integer) {
+    public int parseInteger(String integer, int defaultValue) {
         try {
             return Integer.parseInt(integer);
         } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    public long parseLong(String value) {
-        try {
-            return Long.parseLong(value);
-        } catch (NumberFormatException e) {
-            return 0;
+            return defaultValue;
         }
     }
 
@@ -43,6 +35,10 @@ public class ResolverUtils {
     }
 
     public Long getLongId(HttpServletRequest request) {
-        return parseLong(request.getParameter(ID_PARAM));
+        try {
+            return Long.parseLong(request.getParameter(ID_PARAM));
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

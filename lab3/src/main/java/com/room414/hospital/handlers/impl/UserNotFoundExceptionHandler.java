@@ -20,7 +20,7 @@ public class UserNotFoundExceptionHandler implements ExceptionHandler<UserNotFou
     private static final String USER_NOT_FOUND = "errors.user.notFound";
 
     @Override
-    public ExecutionResult handle(UserNotFoundException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ExecutionResult handle(UserNotFoundException exception, HttpServletRequest request) throws ServletException, IOException {
         log.debug("Can't find {} user", exception.getUsername());
 
         request.setAttribute(Attributes.ERRORS, ImmutableList.of(USER_NOT_FOUND));

@@ -3,6 +3,7 @@ package com.room414.hospital.resolvers.impl;
 import com.room414.hospital.anotations.Resolver;
 import com.room414.hospital.forms.PatientForm;
 import com.room414.hospital.resolvers.ArgumentResolver;
+import com.room414.hospital.utils.ResolverUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ public class PatientFormResolver implements ArgumentResolver<PatientForm> {
     public PatientForm resolve(HttpServletRequest request) {
         PatientForm patientForm = new PatientForm();
 
+        patientForm.setId(ResolverUtils.getLongId(request));
         patientForm.setFirstName(request.getParameter(FIRST_NAME_PARAM));
         patientForm.setFirstName(request.getParameter(LAST_NAME_PARAM));
         patientForm.setFirstName(request.getParameter(DESCRIPTION_PARAM));

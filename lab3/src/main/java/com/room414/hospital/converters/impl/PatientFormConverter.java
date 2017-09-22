@@ -11,6 +11,7 @@ public class PatientFormConverter implements Converter<PatientForm, Patient> {
     public Patient convert(PatientForm source) {
         Patient patient = new Patient();
 
+        patient.setId(source.getId());
         patient.setFirstName(source.getFirstName());
         patient.setLastName(source.getLastName());
         patient.setDescription(source.getDescription());

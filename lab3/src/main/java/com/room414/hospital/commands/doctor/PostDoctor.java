@@ -1,4 +1,0 @@
-package com.room414.hospital.commands.doctor;
-
-public class PostDoctor {
-}

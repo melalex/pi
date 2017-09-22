@@ -15,7 +15,7 @@ public abstract class AbstractValidator<T> implements Validator<T> {
         validate(object, errorCodes);
 
         if (!errorCodes.isEmpty()) {
-            throw new ValidationException(errorCodes, "Subject is invalid");
+            throw new ValidationException(object, errorCodes, "Subject is invalid");
         }
 
     }

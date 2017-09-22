@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void tryAuthenticate(AuthenticationForm form) {
-        applicationUserDao
+    public boolean tryAuthenticate(AuthenticationForm form) {
+        return applicationUserDao
                 .findByUsernameAndPassword(form.getUsername(), form.getPassword())
-                .orElseThrow(() -> new UserNotFoundException(form.getUsername()));
+                .isPresent();
     }
 }

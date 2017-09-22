@@ -13,13 +13,22 @@ public class DefaultCommand extends AbstractCommand {
     private Map<String, String> jspRoutes = ApplicationContext.getInstance().getJspRoutes();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         String jsp = jspRoutes.get(request.getRequestURI());
 
         if (jsp == null) {
             throw new NotFoundException("Wrong Url: {}", request.getRequestURI());
         }
 
-        return ExecutionResult.of(jsp, HttpServletResponse.SC_OK, ExecutionResult.Type.FORWARD);
+        return ExecutionResult.builder()
+                .path(jsp)
+                .statusCode(HttpServletResponse.SC_OK)
+                .type(ExecutionResult.Type.FORWARD)
+                .build();
+    }
+
+    @Override
+    protected String rollbackView() {
+        return Views.HOME;
     }
 }

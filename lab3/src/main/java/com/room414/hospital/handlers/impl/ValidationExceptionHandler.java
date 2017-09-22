@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ValidationExceptionHandler implements ExceptionHandler<ValidationException> {
 
     @Override
-    public ExecutionResult handle(ValidationException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ExecutionResult handle(ValidationException exception, HttpServletRequest request) throws ServletException, IOException {
         request.setAttribute(Attributes.ERRORS, exception.getErrorCodes());
 
         return ExecutionResult.builder()

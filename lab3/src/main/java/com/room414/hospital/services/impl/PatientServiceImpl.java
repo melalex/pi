@@ -13,6 +13,7 @@ import com.room414.hospital.validators.Validator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.room414.hospital.utils.PaginationUtils.withCount;
 
@@ -23,21 +24,22 @@ public class PatientServiceImpl implements PatientService {
     private final Converter<PatientForm, Patient> patientConverter = ApplicationContext.getInstance().getPatientFormConverter();
 
     @Override
-    public void create(PatientForm form) {
+    public void save(PatientForm form) {
         patientFormValidator.validate(form);
-        patientDao.create(patientConverter.convert(form));
-        log.info("Create new Patient {}", form);
+
+        Patient patient = patientConverter.convert(form);
+
+        if (Objects.nonNull(form.getId())) {
+            patientDao.create(patient);
+            log.info("Create new Patient {}", patient);
+        } else {
+            patientDao.update(patient);
+            log.info("Update with id {} and value {}", patient.getId(), patient);
+        }
     }
 
     @Override
-    public void update(long id, PatientForm form) {
-        patientFormValidator.validate(form);
-        patientDao.update(toPatient(id, form));
-        log.info("Update with id {} and value {}", id, form);
-    }
-
-    @Override
-    public Patient findById(long id) {
+    public Patient findById(Long id) {
         return patientDao
                 .findOne(id)
                 .orElseThrow(ErrorUtils.notFound("Patient", "id", id));

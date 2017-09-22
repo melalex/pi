@@ -20,10 +20,10 @@ public abstract class AbstractCommand implements Command {
         try {
             request.setAttribute(Attributes.PREVIOUS_VIEW, rollbackView());
 
-            executionResult = doExecute(request, response);
+            executionResult = doExecute(request);
         } catch (Throwable throwable) {
             executionResult = exceptionHandlerProvider.provide(throwable.getClass())
-                    .handle(throwable, request, response);
+                    .handle(throwable, request);
         }
 
         response.setStatus(executionResult.getStatusCode());
@@ -39,7 +39,7 @@ public abstract class AbstractCommand implements Command {
         }
     }
 
-    protected abstract ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    protected abstract ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException;
 
     protected abstract String rollbackView();
 }

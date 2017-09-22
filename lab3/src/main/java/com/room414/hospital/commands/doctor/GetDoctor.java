@@ -20,7 +20,7 @@ public class GetDoctor extends AbstractCommand {
     private final DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         return ExecutionResult.builder()
                 .path(Views.DOCTOR)
                 .model(doctorService.findByUsername(ResolverUtils.getStringId(request)))

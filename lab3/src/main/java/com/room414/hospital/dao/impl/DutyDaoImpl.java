@@ -26,7 +26,8 @@ public class DutyDaoImpl implements DutyDao {
             "FROM duty " +
             "   LEFT JOIN doctor " +
             "       ON doctor.application_user = duty.doctor " +
-            "WHERE doctor.last_name LIKE ? LIMIT ? OFFSET ?";
+            "WHERE (? IS NULL OR doctor.last_name LIKE ?) " +
+            "LIMIT ? OFFSET ?";
 
     @Language("MySQL")
     private static final String COUNT_BY_LAST_NAME_QUERY =
@@ -34,7 +35,7 @@ public class DutyDaoImpl implements DutyDao {
             "FROM duty " +
             "   LEFT JOIN doctor " +
             "       ON doctor.application_user = duty.doctor " +
-            "WHERE doctor.last_name LIKE ?";
+            "WHERE (? IS NULL OR doctor.last_name LIKE ?)";
 
     // @formatter:on
 
@@ -55,6 +56,7 @@ public class DutyDaoImpl implements DutyDao {
     public List<Duty> findByLastName(String lastName, Pageable pageable) {
         return queryTemplate.selectMany(Duty.class)
                 .withQuery(FIND_BY_LAST_NAME_QUERY)
+                .withParam(lastName)
                 .withParam(SqlUtil.startsWith(lastName))
                 .withParam(pageable)
                 .execute();
@@ -64,6 +66,7 @@ public class DutyDaoImpl implements DutyDao {
     public Integer countByLastName(String lastName) {
         return queryTemplate.aggregate(countExtractor)
                 .withQuery(COUNT_BY_LAST_NAME_QUERY)
+                .withParam(lastName)
                 .withParam(SqlUtil.startsWith(lastName))
                 .execute();
     }

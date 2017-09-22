@@ -73,7 +73,7 @@ public class PatientDaoImpl implements PatientDao {
     }
 
     @Override
-    public Optional<Patient> findOne(long id) {
+    public Optional<Patient> findOne(Long id) {
         return queryTemplate.selectOne(Patient.class)
                 .withQuery(FIND_ONE_QUERY)
                 .withParam(id)

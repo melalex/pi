@@ -15,7 +15,6 @@ import com.room414.hospital.utils.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Route(method = HttpMethod.POST, path = Routes.SIGN_UP)
@@ -24,7 +23,7 @@ public class PostSignUp extends AbstractCommand {
     private ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         AccountForm form = resolverProvider.provide(AccountForm.class)
                 .resolve(request);
 

@@ -12,7 +12,7 @@ public interface PatientDao {
 
     void update(Patient patient);
 
-    Optional<Patient> findOne(long id);
+    Optional<Patient> findOne(Long id);
 
     List<Patient> findAll(Pageable pageable);
 

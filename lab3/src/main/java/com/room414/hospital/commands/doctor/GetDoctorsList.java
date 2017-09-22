@@ -20,10 +20,10 @@ import java.io.IOException;
 @Route(method = HttpMethod.GET, path = Routes.DOCTORS_LIST)
 public class GetDoctorsList extends AbstractCommand {
     private final DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
-    private ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
+    private final ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         DoctorCriteria criteria = resolverProvider.provide(DoctorCriteria.class).resolve(request);
         Pageable pageable = resolverProvider.provide(Pageable.class).resolve(request);
 
@@ -31,7 +31,8 @@ public class GetDoctorsList extends AbstractCommand {
                 .path(Views.DOCTORS_LIST)
                 .model(doctorService.findByCriteria(criteria, pageable))
                 .statusCode(HttpServletResponse.SC_OK)
-                .type(ExecutionResult.Type.FORWARD).build();
+                .type(ExecutionResult.Type.FORWARD)
+                .build();
     }
 
     @Override

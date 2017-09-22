@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DefaultExceptionHandler implements ExceptionHandler<Throwable> {
 
     @Override
-    public ExecutionResult handle(Throwable exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ExecutionResult handle(Throwable exception, HttpServletRequest request) throws ServletException, IOException {
         log.error("Unexpected exception", exception);
 
         return ExecutionResult.builder()

@@ -10,15 +10,20 @@ public class ValidationException extends RuntimeException {
     @Getter
     private List<String> errorCodes;
 
-    public ValidationException(List<String> errorCodes) {
+    @Getter
+    private Object subject;
+
+    public ValidationException(Object subject, List<String> errorCodes) {
         super();
 
+        this.subject = subject;
         this.errorCodes = errorCodes;
     }
 
-    public ValidationException(List<String> errorCodes, String message) {
+    public ValidationException(Object subject, List<String> errorCodes, String message) {
         super(message);
 
+        this.subject = subject;
         this.errorCodes = errorCodes;
     }
 }

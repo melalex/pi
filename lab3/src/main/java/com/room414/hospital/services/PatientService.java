@@ -7,11 +7,9 @@ import com.room414.hospital.forms.PatientForm;
 
 public interface PatientService {
 
-    void create(PatientForm form);
+    void save(PatientForm form);
 
-    void update(long id, PatientForm form);
-
-    Patient findById(long id);
+    Patient findById(Long id);
 
     Page<Patient> findAll(Pageable pageable);
 }

@@ -16,7 +16,7 @@ import java.io.IOException;
 public class NotFoundExceptionHandler implements ExceptionHandler<NotFoundException> {
 
     @Override
-    public ExecutionResult handle(NotFoundException exception, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ExecutionResult handle(NotFoundException exception, HttpServletRequest request) throws ServletException, IOException {
         log.error("Not Found", exception);
 
         return ExecutionResult.builder()

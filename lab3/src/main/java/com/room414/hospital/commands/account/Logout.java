@@ -9,14 +9,13 @@ import com.room414.hospital.routing.internal.HttpMethod;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.LOGOUT)
 public class Logout extends AbstractCommand {
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         request.getSession().invalidate();
 
         return ExecutionResult.redirectTo(Routes.HOME);

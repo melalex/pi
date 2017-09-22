@@ -7,6 +7,7 @@ import com.room414.hospital.commands.iternal.Routes;
 import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.contexts.ApplicationContext;
 import com.room414.hospital.domain.entities.Doctor;
+import com.room414.hospital.exceptions.UserNotFoundException;
 import com.room414.hospital.forms.AuthenticationForm;
 import com.room414.hospital.resolvers.provider.ArgumentResolverProvider;
 import com.room414.hospital.routing.internal.HttpMethod;
@@ -16,7 +17,6 @@ import com.room414.hospital.utils.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Route(method = HttpMethod.POST, path = Routes.SIGN_IN)
@@ -26,11 +26,13 @@ public class PostSignIn extends AbstractCommand {
     private DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
         AuthenticationForm form = resolverProvider.provide(AuthenticationForm.class)
                 .resolve(request);
 
-        userService.tryAuthenticate(form);
+        if (userService.tryAuthenticate(form)) {
+            throw new UserNotFoundException(form.getUsername());
+        }
 
         Doctor doctor = doctorService.findByUsername(form.getUsername());
 
