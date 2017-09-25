@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DoctorMapper extends AbstractRowMapper<Doctor> {
     private static final String FIRST_NAME_COLUMN = "doctor.first_name";
     private static final String LAST_NAME_COLUMN = "doctor.last_name";
-    private static final String SECESSION_COLUMN = "doctor.secession_name";
+    private static final String SECESSION_COLUMN = "doctor.secession";
 
     private ApplicationUserMapper userMapper;
 

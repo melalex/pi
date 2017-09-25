@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-3 col-md-4 text-md-center">
-        <h1 class="display-1">404</h1>
+        <h1 class="display-1">505</h1>
         <h1><fmt:message key="views.error.server"/></h1>
     </div>
 </div>

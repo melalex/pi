@@ -32,12 +32,16 @@ public class DoctorDaoImpl implements DoctorDao {
     private static final String FIND_ONE_QUERY =
             "SELECT * " +
             "FROM doctor " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username  " +
             "WHERE application_user = ?";
 
     @Language("MySQL")
     private static final String FIND_BY_CRITERIA_QUERY =
             "SELECT * " +
             "FROM doctor " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username  " +
             "   LEFT JOIN duty " +
             "       ON doctor.application_user = duty.doctor " +
             "WHERE (? IS NULL OR doctor.secession = ?) " +

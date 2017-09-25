@@ -38,10 +38,10 @@ class RoutingContext {
 
     private Map<String, String> loadJspRoutes() {
         return ImmutableMap.<String, String>builder()
-                .put(toServletRoute(Routes.SIGN_IN), Views.SIGN_IN)
-                .put(toServletRoute(Routes.SIGN_UP), Views.SIGN_UP)
-                .put(toServletRoute(Routes.CREATE_DUTY), Views.DUTY)
-                .put(toServletRoute(Routes.CREATE_PATIENT), Views.PATIENT)
+                .put(Routes.SIGN_IN, Views.SIGN_IN)
+                .put(Routes.SIGN_UP, Views.SIGN_UP)
+                .put(Routes.CREATE_DUTY, Views.DUTY)
+                .put(Routes.CREATE_PATIENT, Views.PATIENT)
                 .build();
     }
 
@@ -60,11 +60,7 @@ class RoutingContext {
     }
 
     private RouteValue toRouteValue(Route route) {
-        return RouteValue.of(route.method(), toServletRoute(route.path()));
-    }
-
-    private String toServletRoute(String route) {
-        return Router.DISPATCHER_SERVLET_MAPPING + route;
+        return RouteValue.of(route.method(), route.path());
     }
 
     private Command byClass(Class<?> clazz) {

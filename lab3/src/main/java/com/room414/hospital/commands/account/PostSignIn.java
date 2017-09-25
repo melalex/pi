@@ -30,7 +30,7 @@ public class PostSignIn extends AbstractCommand {
         AuthenticationForm form = resolverProvider.provide(AuthenticationForm.class)
                 .resolve(request);
 
-        if (userService.tryAuthenticate(form)) {
+        if (!userService.tryAuthenticate(form)) {
             throw new UserNotFoundException(form.getUsername());
         }
 

@@ -2,6 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+<fmt:setLocale value='${sessionScope.locale}'/>
+<fmt:setBundle basename="i18n.messages"/>
+
 <html>
 <head>
     <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
@@ -28,9 +31,9 @@
         <div class="col-md-6"></div>
 
         <div class="col-md-2">
-            <button class="btn btn-success" href="${pageContext.request.contextPath}/site/duty/create">
+            <a class="btn btn-success" href="${pageContext.request.contextPath}/site/duty/create">
                 <fmt:message key="views.action.create"/>
-            </button>
+            </a>
         </div>
 
     </div>

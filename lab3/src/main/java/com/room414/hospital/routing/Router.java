@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Router {
-    String DISPATCHER_SERVLET_MAPPING = "/site";
 
     Command route(HttpMethod method, String path);
 

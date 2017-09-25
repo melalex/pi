@@ -2,6 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+<fmt:setLocale value='${sessionScope.locale}'/>
+<fmt:setBundle basename="i18n.messages"/>
+
 <html>
 <head>
     <jsp:include page="/WEB-INF/views/includes/header.jsp"/>

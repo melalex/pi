@@ -72,7 +72,7 @@
                     </c:forEach>
                 </c:when>
                 <c:when test="${page > (pageCount - 4)}">
-                    <c:forEach var="i" begin="1" end="$5">
+                    <c:forEach var="i" begin="1" end="5">
                         <li>
                             <a href="${pageContext.request.requestURI}?page=${i}&${pageContext.request.queryString}">
                                     ${i}<span class="sr-only">(current)</span>

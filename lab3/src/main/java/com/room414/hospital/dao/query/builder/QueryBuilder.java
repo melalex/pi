@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -57,7 +58,7 @@ public class QueryBuilder<T> {
         }
 
         public T execute() {
-            return queryBuilder.execute(params);
+            return queryBuilder.execute(params.toArray());
         }
     }
 
@@ -66,11 +67,11 @@ public class QueryBuilder<T> {
         return new ParamsBuilder<>(this);
     }
 
-    private T execute(Object param, Object... params) {
+    private T execute(Object... params) {
         checkArgument(isNotBlank(sql), "Query can't be Blank");
 
-        log.debug("Execute query {}", SqlUtil.sqlFormat(sql, Lists.asList(param, params)));
+        log.debug("Execute query {}", SqlUtil.sqlFormat(sql, params));
 
-        return callback.onBuild(sql, param, params);
+        return callback.onBuild(sql, params);
     }
 }

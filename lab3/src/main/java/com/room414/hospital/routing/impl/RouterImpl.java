@@ -25,10 +25,8 @@ public class RouterImpl implements Router {
 
     @Override
     public void redirect(String to, HttpServletResponse response) throws IOException {
-        String url = DISPATCHER_SERVLET_MAPPING + to;
+        log.debug("Redirect to {}", to);
 
-        log.debug("Redirect to");
-
-        response.sendRedirect(url);
+        response.sendRedirect(to);
     }
 }
