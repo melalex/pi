@@ -10,12 +10,11 @@ import com.room414.hospital.domain.internal.Page;
 import com.room414.hospital.forms.AccountForm;
 import com.room414.hospital.services.DoctorService;
 import com.room414.hospital.utils.ErrorUtils;
+import com.room414.hospital.utils.PaginationUtils;
 import com.room414.hospital.validators.Validator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-
-import static com.room414.hospital.utils.PaginationUtils.withCount;
 
 @Slf4j
 public class DoctorServiceImpl implements DoctorService {
@@ -47,7 +46,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Page<Doctor> findByCriteria(DoctorCriteria criteria, Pageable pageable) {
         List<Doctor> content = doctorDao.findByCriteria(criteria, pageable);
-        Pageable counted = withCount(pageable, doctorDao.countByCriteria(criteria));
+        Pageable counted = PaginationUtils.withCount(pageable, doctorDao.countByCriteria(criteria));
 
         return Page.of(content, counted);
     }

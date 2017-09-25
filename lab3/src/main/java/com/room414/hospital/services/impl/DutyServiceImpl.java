@@ -8,12 +8,11 @@ import com.room414.hospital.domain.entities.Duty;
 import com.room414.hospital.domain.internal.Page;
 import com.room414.hospital.forms.DutyForm;
 import com.room414.hospital.services.DutyService;
+import com.room414.hospital.utils.PaginationUtils;
 import com.room414.hospital.validators.Validator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-
-import static com.room414.hospital.utils.PaginationUtils.withCount;
 
 @Slf4j
 public class DutyServiceImpl implements DutyService {
@@ -31,7 +30,7 @@ public class DutyServiceImpl implements DutyService {
     @Override
     public Page<Duty> findByLastName(String lastName, Pageable pageable) {
         List<Duty> content = dutyDao.findByLastName(lastName, pageable);
-        Pageable counted = withCount(pageable, dutyDao.countByLastName(lastName));
+        Pageable counted = PaginationUtils.withCount(pageable, dutyDao.countByLastName(lastName));
 
         return Page.of(content, counted);
     }

@@ -1,6 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'idea'
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '1.10'
+    id 'java'
+    id 'war'
+    id 'idea'
+}
 
 sourceCompatibility = 1.8
 
@@ -12,6 +15,10 @@ repositories {
     jcenter()
 
     maven { url "https://maven-eu.nuxeo.org/nexus/content/repositories/public-releases/" }
+}
+
+lombok {
+    version = "1.16.18"
 }
 
 dependencies {
@@ -28,8 +35,6 @@ dependencies {
     compile group: 'org.webjars', name: 'jquery', version: '3.2.1'
     compile group: 'org.webjars', name: 'bootstrap', version: '4.0.0-beta'
     compile group: 'org.webjars', name: 'font-awesome', version: '4.7.0'
-
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
 
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '3.0.1'
     providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'

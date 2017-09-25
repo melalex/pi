@@ -9,13 +9,12 @@ import com.room414.hospital.domain.internal.Page;
 import com.room414.hospital.forms.PatientForm;
 import com.room414.hospital.services.PatientService;
 import com.room414.hospital.utils.ErrorUtils;
+import com.room414.hospital.utils.PaginationUtils;
 import com.room414.hospital.validators.Validator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
-
-import static com.room414.hospital.utils.PaginationUtils.withCount;
 
 @Slf4j
 public class PatientServiceImpl implements PatientService {
@@ -48,7 +47,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Page<Patient> findAll(Pageable pageable) {
         List<Patient> content = patientDao.findAll(pageable);
-        Pageable counted = withCount(pageable, patientDao.countAll());
+        Pageable counted = PaginationUtils.withCount(pageable, patientDao.countAll());
 
         return Page.of(content, counted);
     }
