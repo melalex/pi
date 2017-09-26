@@ -17,5 +17,5 @@ public abstract class AbstractRowMapper<T> implements RowMapper<T> {
         }
     }
 
-    protected abstract T mapEntity(ResultSet resultSet) throws SQLException ;
+    protected abstract T mapEntity(ResultSet resultSet) throws SQLException;
 }

@@ -30,12 +30,20 @@ public class PatientDaoImpl implements PatientDao {
     private static final String FIND_ONE_QUERY =
             "SELECT * " +
             "FROM patient " +
+            "   LEFT JOIN doctor " +
+            "       ON patient.doctor = doctor.application_user " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username " +
             "WHERE id = ?";
 
     @Language("MySQL")
     private static final String FIND_ALL_QUERY =
             "SELECT * " +
             "FROM patient " +
+            "   LEFT JOIN doctor " +
+            "       ON patient.doctor = doctor.application_user " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username " +
             "LIMIT ? OFFSET ?";
 
     @Language("MySQL")

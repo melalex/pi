@@ -8,4 +8,7 @@ public interface SelectTemplate<T> extends AutoCloseable {
     Optional<T> queryOne(String sql, Object... params);
 
     List<T> queryList(String sql, Object... params);
+
+    @Override
+    void close();
 }

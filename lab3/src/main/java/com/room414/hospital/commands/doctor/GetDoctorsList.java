@@ -12,10 +12,8 @@ import com.room414.hospital.resolvers.provider.ArgumentResolverProvider;
 import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.DoctorService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.DOCTORS_LIST)
 public class GetDoctorsList extends AbstractCommand {
@@ -23,7 +21,7 @@ public class GetDoctorsList extends AbstractCommand {
     private final ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         DoctorCriteria criteria = resolverProvider.provide(DoctorCriteria.class).resolve(request);
         Pageable pageable = resolverProvider.provide(Pageable.class).resolve(request);
 

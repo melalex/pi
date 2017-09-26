@@ -15,18 +15,16 @@ import com.room414.hospital.services.DoctorService;
 import com.room414.hospital.services.UserService;
 import com.room414.hospital.utils.SessionUtil;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @Route(method = HttpMethod.POST, path = Routes.SIGN_IN)
 public class PostSignIn extends AbstractCommand {
-    private ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
-    private UserService userService = ApplicationContext.getInstance().getUserService();
-    private DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
+    private final ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
+    private final UserService userService = ApplicationContext.getInstance().getUserService();
+    private final DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         AuthenticationForm form = resolverProvider.provide(AuthenticationForm.class)
                 .resolve(request);
 

@@ -11,10 +11,8 @@ import com.room414.hospital.resolvers.provider.ArgumentResolverProvider;
 import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.DutyService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Route(method = HttpMethod.POST, path = Routes.DUTY)
 public class PostDuty extends AbstractCommand {
@@ -22,7 +20,7 @@ public class PostDuty extends AbstractCommand {
     private final ArgumentResolverProvider argumentResolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         DutyForm form = argumentResolverProvider.provide(DutyForm.class).resolve(request);
 
         dutyService.create(form);

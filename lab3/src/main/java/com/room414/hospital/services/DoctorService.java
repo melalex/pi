@@ -5,15 +5,12 @@ import com.room414.hospital.domain.entities.Doctor;
 import com.room414.hospital.domain.internal.DoctorCriteria;
 import com.room414.hospital.domain.internal.Page;
 import com.room414.hospital.forms.AccountForm;
-import com.room414.hospital.forms.AuthenticationForm;
-
-import java.util.List;
 
 public interface DoctorService {
 
     void create(AccountForm form);
 
-    boolean isDoctorExists(String username);
+    boolean isDoctorNotExist(String username);
 
     Doctor findByUsername(String username);
 

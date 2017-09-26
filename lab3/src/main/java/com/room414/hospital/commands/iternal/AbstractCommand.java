@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public abstract class AbstractCommand implements Command {
-    private ExceptionHandlerProvider exceptionHandlerProvider = ApplicationContext.getInstance()
+    private final ExceptionHandlerProvider exceptionHandlerProvider = ApplicationContext.getInstance()
             .getExceptionHandlerProvider();
 
     @Override
@@ -39,7 +39,7 @@ public abstract class AbstractCommand implements Command {
         }
     }
 
-    protected abstract ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException;
+    protected abstract ExecutionResult doExecute(HttpServletRequest request);
 
     protected abstract String rollbackView();
 }

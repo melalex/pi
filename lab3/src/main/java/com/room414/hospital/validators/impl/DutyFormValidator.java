@@ -6,7 +6,7 @@ import com.room414.hospital.services.DoctorService;
 
 import java.util.List;
 
-import static java.util.Objects.nonNull;
+import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -24,11 +24,11 @@ public class DutyFormValidator extends AbstractValidator<DutyForm> {
             errorCodes.add(DOCTOR_IS_EMPTY);
         }
 
-        if (isNotBlank(object.getDoctor()) && doctorService.isDoctorExists(object.getDoctor())) {
+        if (isNotBlank(object.getDoctor()) && doctorService.isDoctorNotExist(object.getDoctor())) {
             errorCodes.add(DOCTOR_NOT_FOUND);
         }
 
-        if (nonNull(object.getDate())) {
+        if (isNull(object.getDate())) {
             errorCodes.add(DATE_IS_EMPTY);
         }
     }

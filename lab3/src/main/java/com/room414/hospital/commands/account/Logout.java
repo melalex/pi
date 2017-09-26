@@ -7,15 +7,13 @@ import com.room414.hospital.commands.iternal.Routes;
 import com.room414.hospital.commands.iternal.Views;
 import com.room414.hospital.routing.internal.HttpMethod;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.LOGOUT)
 public class Logout extends AbstractCommand {
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         request.getSession().invalidate();
 
         return ExecutionResult.redirectTo(Routes.SIGN_IN);

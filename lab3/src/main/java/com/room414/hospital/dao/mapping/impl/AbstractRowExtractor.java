@@ -17,6 +17,6 @@ public abstract class AbstractRowExtractor<T> implements RowExtractor<T> {
         }
     }
 
-    protected abstract T extractValue(ResultSet resultSet) throws SQLException ;
+    protected abstract T extractValue(ResultSet resultSet) throws SQLException;
 
 }

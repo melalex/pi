@@ -1,6 +1,6 @@
 body, html {
     height: 100%;
-    background: #d3d3d3 no-repeat;
+    background: #ffffff no-repeat;
 }
 
 .main {
@@ -51,12 +51,15 @@ input::-webkit-input-placeholder {
     margin-top: 5px;
 }
 
-.login-register {
-    font-size: 11px;
-    text-align: center;
-}
-
 .no-result-text {
     color: lightgrey;
     margin-top: 10%;
+}
+
+.margit-top {
+    margin-top: 10px;
+}
+
+.search-button {
+    margin-left: 5px;
 }

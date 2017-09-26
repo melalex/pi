@@ -11,10 +11,8 @@ import com.room414.hospital.resolvers.provider.ArgumentResolverProvider;
 import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.DutyService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.DUTIES_LIST)
 public class GetDutiesList extends AbstractCommand {
@@ -24,12 +22,12 @@ public class GetDutiesList extends AbstractCommand {
     private final ArgumentResolverProvider argumentResolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         Pageable pageable = argumentResolverProvider.provide(Pageable.class).resolve(request);
         String lastName = request.getParameter(LAST_NAME_PARAM);
 
         return ExecutionResult.builder()
-                .path(Views.DOCTORS_LIST)
+                .path(Views.DUTIES_LIST)
                 .model(dutyService.findByLastName(lastName, pageable))
                 .statusCode(HttpServletResponse.SC_OK)
                 .type(ExecutionResult.Type.FORWARD)

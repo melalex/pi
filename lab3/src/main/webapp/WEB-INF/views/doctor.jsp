@@ -9,13 +9,18 @@
 <head>
     <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
-    <title>${requestScope.model.username}</title>
+    <title>${requestScope.model.getId()}</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="container">
+<div class="container margit-top">
+    <div class="text-center">
+        <h1 class="title"><fmt:message key="views.domain.doctor"/></h1>
+        <hr/>
+    </div>
+
     <div class="row">
         <label class="col-md-3"><fmt:message key="views.domain.username"/></label>
         <label class="col-md-9">${requestScope.model.getId()}</label>

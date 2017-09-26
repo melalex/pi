@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 2506454429968763561L;
 
-    private Router router = ApplicationContext.getInstance().getRouter();
+    private final Router router = ApplicationContext.getInstance().getRouter();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

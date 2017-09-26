@@ -30,8 +30,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public boolean isDoctorExists(String username) {
-        return doctorDao
+    public boolean isDoctorNotExist(String username) {
+        return !doctorDao
                 .findOne(username)
                 .isPresent();
     }

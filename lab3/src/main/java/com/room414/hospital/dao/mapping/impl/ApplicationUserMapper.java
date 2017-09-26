@@ -14,7 +14,7 @@ public class ApplicationUserMapper extends AbstractRowMapper<ApplicationUser> {
         ApplicationUser applicationUser = new ApplicationUser();
 
         applicationUser.setUsername(resultSet.getString(USERNAME_COLUMN_NAME));
-        applicationUser.setUsername(resultSet.getString(PASSWORD_COLUMN_NAME));
+        applicationUser.setPassword(resultSet.getString(PASSWORD_COLUMN_NAME));
 
         return applicationUser;
     }

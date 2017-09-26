@@ -14,4 +14,8 @@ public class Patient implements Identifiable<Long>, Serializable {
     private String lastName;
     private String description;
     private Doctor doctor;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

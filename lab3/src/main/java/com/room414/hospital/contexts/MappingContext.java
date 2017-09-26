@@ -32,7 +32,7 @@ class MappingContext {
         return ImmutableMap.<Class<?>, RowMapper<?>>builder()
                 .put(applicationUserMapper.support(), applicationUserMapper)
                 .put(doctorMapper.support(), doctorMapper)
-                .put(dutyMapper.support(), doctorMapper)
+                .put(dutyMapper.support(), dutyMapper)
                 .put(patientMapper.support(), patientMapper)
                 .build();
     }

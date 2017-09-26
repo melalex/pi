@@ -28,12 +28,12 @@ public class PatientServiceImpl implements PatientService {
 
         Patient patient = patientConverter.convert(form);
 
-        if (Objects.nonNull(form.getId())) {
+        if (Objects.isNull(form.getId())) {
             patientDao.create(patient);
             log.info("Create new Patient {}", patient);
         } else {
             patientDao.update(patient);
-            log.info("Update with id {} and value {}", patient.getId(), patient);
+            log.info("Update Patient {}", patient);
         }
     }
 

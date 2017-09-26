@@ -6,7 +6,6 @@ import com.room414.hospital.resolvers.ArgumentResolver;
 import com.room414.hospital.utils.ResolverUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
 
 @Resolver(DutyForm.class)
 public class DutyFormResolver implements ArgumentResolver<DutyForm> {

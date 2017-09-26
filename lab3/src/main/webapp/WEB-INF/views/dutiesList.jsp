@@ -15,9 +15,11 @@
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="content">
-    <h1><fmt:message key="views.domain.duties"/></h1>
-
+<div class="container margit-top">
+    <div class="text-center">
+        <h1 class="title"><fmt:message key="views.domain.duties"/></h1>
+        <hr/>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <form action="${pageContext.request.contextPath}/site/duties" class="form-inline">
@@ -31,7 +33,7 @@
         <div class="col-md-6"></div>
 
         <div class="col-md-2">
-            <a class="btn btn-success" href="${pageContext.request.contextPath}/site/duty/create">
+            <a class="btn btn-success search-button" href="${pageContext.request.contextPath}/site/duty/create">
                 <fmt:message key="views.action.create"/>
             </a>
         </div>
@@ -52,7 +54,9 @@
                 <c:forEach var="item" items="${requestScope.model.getContent()}">
                     <tr>
                         <td>${item.getId()}</td>
-                        <td><a href="${pageContext.request.contextPath}/site/doctor?id=${item.getDoctor().getId()}">${item.getDoctor().getId()}</a></td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/site/doctor?id=${item.getDoctor().getId()}">${item.getDoctor().getId()}</a>
+                        </td>
                         <td>${item.getDate()}</td>
                     </tr>
                 </c:forEach>

@@ -2,6 +2,8 @@ package com.room414.hospital.domain.entities;
 
 import com.google.common.base.CaseFormat;
 
+import static com.google.common.base.Strings.nullToEmpty;
+
 public enum Secession {
     ORTHOPEDICS,
     THERAPY,
@@ -16,7 +18,7 @@ public enum Secession {
                 return value;
             }
         }
-        return NOT_DEFINED;
+        return null;
     }
 
     @Override
@@ -25,10 +27,10 @@ public enum Secession {
     }
 
     private static String toCamel(String value) {
-        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, value);
+        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, nullToEmpty(value));
     }
 
     private static String toUnderscore(String value) {
-        return CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, value);
+        return CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, nullToEmpty(value));
     }
 }

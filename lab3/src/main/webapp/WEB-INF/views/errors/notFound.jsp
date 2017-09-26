@@ -11,11 +11,9 @@
 <body>
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 
-<div class="row">
-    <div class="col-md-3 col-md-4 text-md-center">
-        <h1 class="display-1">404</h1>
-        <h1><fmt:message key="views.error.notFound"/></h1>
-    </div>
+<div class="text-center">
+    <h1 class="display-1">404</h1>
+    <h1><fmt:message key="views.error.notFound"/></h1>
 </div>
 
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>

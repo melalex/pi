@@ -14,6 +14,6 @@ public class DutyFormConverter implements Converter<DutyForm, Duty> {
         duty.setDoctor(ConversionUtil.toDoctor(source.getDoctor()));
         duty.setDate(source.getDate());
 
-        return null;
+        return duty;
     }
 }

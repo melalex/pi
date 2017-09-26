@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class LocaleFilter implements Filter {
-    private LocaleService localeService = ApplicationContext.getInstance().getLocaleService();
+    private final LocaleService localeService = ApplicationContext.getInstance().getLocaleService();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

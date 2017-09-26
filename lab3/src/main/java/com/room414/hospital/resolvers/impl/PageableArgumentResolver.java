@@ -9,7 +9,7 @@ import com.room414.hospital.utils.ResolverUtils;
 import javax.servlet.http.HttpServletRequest;
 
 @Resolver(Pageable.class)
-public class PageableArgumentReslver implements ArgumentResolver<Pageable> {
+public class PageableArgumentResolver implements ArgumentResolver<Pageable> {
     private static final String LIMIT_PARAM = "limit";
     private static final String PAGE_PARAM = "page";
 

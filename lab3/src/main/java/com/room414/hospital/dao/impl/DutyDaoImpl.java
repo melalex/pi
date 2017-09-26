@@ -26,6 +26,8 @@ public class DutyDaoImpl implements DutyDao {
             "FROM duty " +
             "   LEFT JOIN doctor " +
             "       ON doctor.application_user = duty.doctor " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username " +
             "WHERE (? IS NULL OR doctor.last_name LIKE ?) " +
             "LIMIT ? OFFSET ?";
 
@@ -35,6 +37,8 @@ public class DutyDaoImpl implements DutyDao {
             "FROM duty " +
             "   LEFT JOIN doctor " +
             "       ON doctor.application_user = duty.doctor " +
+            "   LEFT JOIN application_user " +
+            "       ON doctor.application_user = application_user.username " +
             "WHERE (? IS NULL OR doctor.last_name LIKE ?)";
 
     // @formatter:on

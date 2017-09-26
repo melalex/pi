@@ -15,34 +15,32 @@
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="container">
+<div class="container margit-top">
+    <div class="text-center">
+        <h1 class="title"><fmt:message key="views.domain.patient"/></h1>
+        <hr/>
+    </div>
     <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title"><fmt:message key="views.domain.patient"/></h1>
-                <hr/>
-            </div>
-        </div>
         <div class="main-login main-center">
             <form action="${pageContext.request.contextPath}/site/patient${requestScope.model != null ? requestScope.model.getId() : null}"
                   accept-charset="UTF-8" method="post">
 
                 <div class="form-group">
-                    <label for="username" class="col-sm-2">
+                    <label for="doctor">
                         <fmt:message key="views.domain.username"/>
                     </label>
-                    <div class="cols-sm-10">
+                    <div>
                         <div class="input-group">
-                            <input class="form-control" name="username" id="username"
-                                   placeholder="<fmt:message key="views.domain.username" />"
-                                   value="<c:out value="${requestScope.model.getDoctor().getId()}" />"/>
+                            <input class="form-control" name="doctor" id="doctor"
+                                   placeholder="<fmt:message key="views.domain.doctor"/>"
+                                   value="<c:out value="${sessionScope.user.getId()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-2"><fmt:message key="views.domain.firstName"/></label>
-                    <div class="col-sm-10">
+                    <label for="firstName"><fmt:message key="views.domain.firstName"/></label>
+                    <div>
                         <div class="input-group">
                             <input class="form-control" name="firstName" id="firstName"
                                    placeholder="<fmt:message key="views.domain.firstName"/>"
@@ -52,8 +50,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName" class="col-sm-2"><fmt:message key="views.domain.lastName"/></label>
-                    <div class="col-sm-10">
+                    <label for="lastName"><fmt:message key="views.domain.lastName"/></label>
+                    <div>
                         <div class="input-group">
                             <input class="form-control" name="lastName" id="lastName"
                                    placeholder="<fmt:message key="views.domain.lastName"/>"
@@ -63,10 +61,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description" class="col-sm-2"><fmt:message key="views.domain.description"/></label>
-                    <div class="col-sm-10">
+                    <label for="description"><fmt:message key="views.domain.description"/></label>
+                    <div>
                         <div class="input-group">
-                            <textarea class="form-control" name="lastName" id="description"
+                            <textarea class="form-control" name="description" id="description"
                                       placeholder="<fmt:message key="views.domain.description"/>">
                                 <c:out value="${requestScope.model.getDescription()}"/>
                             </textarea>
@@ -75,7 +73,7 @@
                 </div>
 
                 <input class="btn btn-primary btn-lg btn-block login-button" type="submit"
-                       value="<fmt:message key="views.action.create"/>">
+                       value="<fmt:message key="views.action.save"/>">
             </form>
         </div>
     </div>

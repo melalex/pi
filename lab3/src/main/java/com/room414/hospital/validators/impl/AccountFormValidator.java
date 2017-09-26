@@ -37,7 +37,7 @@ public class AccountFormValidator extends AbstractValidator<AccountForm> {
 
         if (isBlank(object.getPassword())) {
             errorCodes.add(PASSWORD_IS_EMPTY);
-        } else if (!object.getPassword().equals(object.getRetryPassword())){
+        } else if (!object.getPassword().equals(object.getRetryPassword())) {
             errorCodes.add(PASSWORDS_DID_NOT_MATCHED);
         }
 

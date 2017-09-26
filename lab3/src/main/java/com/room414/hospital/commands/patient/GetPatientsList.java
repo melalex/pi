@@ -11,18 +11,16 @@ import com.room414.hospital.resolvers.provider.ArgumentResolverProvider;
 import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.PatientService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.PATIENTS_LIST)
-public class GetPatientsList extends AbstractCommand{
+public class GetPatientsList extends AbstractCommand {
     private final PatientService patientService = ApplicationContext.getInstance().getPatientService();
     private final ArgumentResolverProvider argumentResolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         Pageable pageable = argumentResolverProvider.provide(Pageable.class).resolve(request);
 
         return ExecutionResult.builder()

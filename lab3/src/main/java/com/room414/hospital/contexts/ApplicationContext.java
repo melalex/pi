@@ -6,7 +6,7 @@ import lombok.experimental.Delegate;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApplicationContext {
-    private static ApplicationContext ourInstance = new ApplicationContext();
+    private static final ApplicationContext ourInstance = new ApplicationContext();
 
     @Delegate
     private final DataSourceContext dataSourceContext = new DataSourceContext();

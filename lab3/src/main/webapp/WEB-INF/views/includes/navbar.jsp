@@ -5,23 +5,32 @@
 <fmt:setLocale value='${sessionScope.locale}'/>
 <fmt:setBundle basename="i18n.messages"/>
 
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/site/patients">Hospital</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/site/patients"><fmt:message key="views.navbar.link.patients"/></a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/site/doctors"><fmt:message key="views.navbar.link.doctors"/></a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/site/duties"><fmt:message key="views.navbar.link.duties"/></a>
-            </li>
-        </ul>
-        <a class="nav-link" href="${pageContext.request.contextPath}/site/logout"><fmt:message key="views.navbar.link.logout"/></a>
-    </div>
+    <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/site/patients">
+                <fmt:message key="views.navbar.link.patients"/>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/site/doctors">
+                <fmt:message key="views.navbar.link.doctors"/>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/site/duties">
+                <fmt:message key="views.navbar.link.duties"/>
+            </a>
+        </li>
+    </ul>
+
+    <ul>
+        <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/site/logout">
+                <fmt:message key="views.navbar.link.logout"/>
+            </a>
+        </li>
+    </ul>
 </nav>

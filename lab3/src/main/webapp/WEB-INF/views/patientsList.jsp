@@ -15,26 +15,18 @@
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="content">
-
-    <div class="row">
-        <div class="col-md-4">
-            <h1><fmt:message key="views.domain.patients"/></h1>
-        </div>
-
-        <div class="col-md-6"></div>
-
-        <div class="col-md-2">
-            <a class="btn btn-success" href="${pageContext.request.contextPath}/site/patient/create">
-                <fmt:message key="views.action.create"/>
-            </a>
-        </div>
-
+<div class="container margit-top">
+    <div class="text-center">
+        <h1><fmt:message key="views.domain.patients"/></h1>
+        <hr/>
+        <a class="btn btn-success" href="${pageContext.request.contextPath}/site/patient/create">
+            <fmt:message key="views.action.create"/>
+        </a>
     </div>
 
     <c:choose>
         <c:when test="${requestScope.model.getPageable().getEntityCount() > 0}">
-            <table class="table table-hover">
+            <table class="table table-hover margit-top">
                 <thead>
                 <tr>
                     <th><fmt:message key="views.domain.id"/></th>
@@ -45,15 +37,15 @@
                 <tbody>
                 <c:forEach var="item" items="${requestScope.model.getContent()}">
                     <tr>
-                        <td>${item.getId()}</td>
+                        <td><c:out value='${item.getId()}'/></td>
                         <td>
                             <a href="${pageContext.request.contextPath}/site/patient?id=${item.getId()}">
-                                    ${item.getFirstName() + " " + item.getLastName}
+                                <c:out value='${item.getFullName()}'/>
                             </a>
                         </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/site/doctor?id=${item.getDoctor().getId()}">
-                                    ${item.getDoctor().getId()}
+                                <c:out value='${item.getDoctor().getId()}'/>
                             </a>
                         </td>
                     </tr>

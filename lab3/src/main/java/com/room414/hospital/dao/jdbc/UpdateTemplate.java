@@ -7,4 +7,7 @@ public interface UpdateTemplate extends AutoCloseable {
     void commit();
 
     void rollback();
+
+    @Override
+    void close();
 }

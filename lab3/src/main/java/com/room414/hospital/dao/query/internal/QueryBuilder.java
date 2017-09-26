@@ -1,8 +1,8 @@
-package com.room414.hospital.dao.query.builder;
+package com.room414.hospital.dao.query.internal;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.room414.hospital.dao.query.BuildCallback;
+import com.room414.hospital.dao.query.CompleteCallback;
 import com.room414.hospital.domain.Identifiable;
 import com.room414.hospital.domain.Pageable;
 import com.room414.hospital.utils.SqlUtil;
@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -23,7 +23,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class QueryBuilder<T> {
 
     @NonNull
-    private final BuildCallback<T> callback;
+    private final BuildCallback<T> buildCallback;
+
+    @NonNull
+    private final CompleteCallback completeCallback;
 
     private String sql;
 
@@ -48,7 +51,7 @@ public class QueryBuilder<T> {
         }
 
         public ParamsBuilder<T> withParam(Enum<?> anEnum) {
-            return withParam(anEnum.toString());
+            return withParam(Objects.nonNull(anEnum) ? anEnum.toString() : null);
         }
 
         public ParamsBuilder<T> withParams(Object param, Object... params) {
@@ -72,6 +75,10 @@ public class QueryBuilder<T> {
 
         log.debug("Execute query {}", SqlUtil.sqlFormat(sql, params));
 
-        return callback.onBuild(sql, params);
+        T result = buildCallback.onBuild(sql, params);
+
+        completeCallback.onComplete();
+
+        return result;
     }
 }

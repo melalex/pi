@@ -1,7 +1,7 @@
 package com.room414.hospital.dao.query;
 
 import com.room414.hospital.dao.mapping.RowExtractor;
-import com.room414.hospital.dao.query.builder.QueryBuilder;
+import com.room414.hospital.dao.query.internal.QueryBuilder;
 
 import java.util.List;
 import java.util.Optional;

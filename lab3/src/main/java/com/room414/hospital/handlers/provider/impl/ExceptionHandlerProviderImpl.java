@@ -7,8 +7,8 @@ import com.room414.hospital.handlers.provider.ExceptionHandlerProvider;
 import java.util.Map;
 
 public class ExceptionHandlerProviderImpl implements ExceptionHandlerProvider {
-    private Map<Class<? extends Throwable>, ExceptionHandler<? extends Throwable>> handlers = ApplicationContext.getInstance().getHandlers();
-    private ExceptionHandler<Throwable> defaultExceptionHandler = ApplicationContext.getInstance().getDefaultExceptionHandler();
+    private final Map<Class<? extends Throwable>, ExceptionHandler<? extends Throwable>> handlers = ApplicationContext.getInstance().getHandlers();
+    private final ExceptionHandler<Throwable> defaultExceptionHandler = ApplicationContext.getInstance().getDefaultExceptionHandler();
 
     @SuppressWarnings("unchecked")
     @Override

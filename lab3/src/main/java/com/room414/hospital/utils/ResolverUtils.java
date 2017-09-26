@@ -7,16 +7,18 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import static com.google.common.base.Strings.nullToEmpty;
+
 @UtilityClass
 public class ResolverUtils {
     private static final String ID_PARAM = "id";
-    private static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm";
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
 
     public Date parseDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
 
         try {
-            return new Date(formatter.parse(dateString).getTime());
+            return new Date(formatter.parse(nullToEmpty(dateString)).getTime());
         } catch (ParseException e) {
             return null;
         }

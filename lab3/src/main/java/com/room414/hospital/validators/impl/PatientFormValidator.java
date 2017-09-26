@@ -24,7 +24,7 @@ public class PatientFormValidator extends AbstractValidator<PatientForm> {
             errorCodes.add(DOCTOR_IS_EMPTY);
         }
 
-        if (isNotBlank(object.getDoctor()) && doctorService.isDoctorExists(object.getDoctor())) {
+        if (isNotBlank(object.getDoctor()) && doctorService.isDoctorNotExist(object.getDoctor())) {
             errorCodes.add(DOCTOR_NOT_FOUND);
         }
 

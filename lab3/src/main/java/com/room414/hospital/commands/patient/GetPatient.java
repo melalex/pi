@@ -10,17 +10,15 @@ import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.PatientService;
 import com.room414.hospital.utils.ResolverUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Route(method = HttpMethod.GET, path = Routes.PATIENT)
 public class GetPatient extends AbstractCommand {
     private final PatientService patientService = ApplicationContext.getInstance().getPatientService();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         return ExecutionResult.builder()
                 .path(Views.PATIENT)
                 .model(patientService.findById(ResolverUtils.getLongId(request)))

@@ -13,17 +13,15 @@ import com.room414.hospital.routing.internal.HttpMethod;
 import com.room414.hospital.services.DoctorService;
 import com.room414.hospital.utils.SessionUtil;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @Route(method = HttpMethod.POST, path = Routes.SIGN_UP)
 public class PostSignUp extends AbstractCommand {
     private final DoctorService doctorService = ApplicationContext.getInstance().getDoctorService();
-    private ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
+    private final ArgumentResolverProvider resolverProvider = ApplicationContext.getInstance().getArgumentResolverProvider();
 
     @Override
-    protected ExecutionResult doExecute(HttpServletRequest request) throws ServletException, IOException {
+    protected ExecutionResult doExecute(HttpServletRequest request) {
         AccountForm form = resolverProvider.provide(AccountForm.class)
                 .resolve(request);
 

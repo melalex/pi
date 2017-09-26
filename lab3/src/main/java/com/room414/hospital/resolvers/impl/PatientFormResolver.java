@@ -20,9 +20,9 @@ public class PatientFormResolver implements ArgumentResolver<PatientForm> {
 
         patientForm.setId(ResolverUtils.getLongId(request));
         patientForm.setFirstName(request.getParameter(FIRST_NAME_PARAM));
-        patientForm.setFirstName(request.getParameter(LAST_NAME_PARAM));
-        patientForm.setFirstName(request.getParameter(DESCRIPTION_PARAM));
-        patientForm.setFirstName(request.getParameter(DOCTOR_PARAM));
+        patientForm.setLastName(request.getParameter(LAST_NAME_PARAM));
+        patientForm.setDescription(request.getParameter(DESCRIPTION_PARAM));
+        patientForm.setDoctor(request.getParameter(DOCTOR_PARAM));
 
         return patientForm;
     }

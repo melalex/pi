@@ -15,35 +15,34 @@
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="container">
+<div class="container margit-top">
+    <div class="text-center">
+        <h1 class="title"><fmt:message key="views.domain.duty"/></h1>
+        <hr/>
+    </div>
+
     <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title"><fmt:message key="views.domain.duty"/></h1>
-                <hr/>
-            </div>
-        </div>
         <div class="main-login main-center">
             <form action="${pageContext.request.contextPath}/site/duty" accept-charset="UTF-8" method="post">
 
                 <div class="form-group">
-                    <label for="username" class="col-sm-2">
+                    <label for="doctor">
                         <fmt:message key="views.domain.username"/>
                     </label>
-                    <div class="cols-sm-10">
+                    <div>
                         <div class="input-group">
-                            <input class="form-control" name="username" id="username"
-                                   placeholder="<fmt:message key="views.domain.username" />"
-                                   value="<c:out value="${requestScope.model.getDoctor().getId()}" />"/>
+                            <input class="form-control" name="doctor" id="doctor"
+                                   placeholder="<fmt:message key="views.domain.doctor"/>"
+                                   value="<c:out value="${sessionScope.user.getId()}"/>"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="date" class="col-sm-2">
+                    <label for="date">
                         <fmt:message key="views.domain.date"/>
                     </label>
-                    <div class="cols-sm-10">
+                    <div>
                         <div class="input-group">
                             <input type="date"
                                    class="form-control"

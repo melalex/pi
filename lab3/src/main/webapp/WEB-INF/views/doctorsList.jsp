@@ -15,8 +15,11 @@
 <jsp:include page="/WEB-INF/views/includes/navbar.jsp"/>
 <jsp:include page="/WEB-INF/views/includes/errors.jsp"/>
 
-<div class="content">
-    <h1><fmt:message key="views.domain.doctors"/></h1>
+<div class="container margit-top">
+    <div class="text-center">
+        <h1 class="title"><fmt:message key="views.domain.doctors"/></h1>
+        <hr/>
+    </div>
 
     <div class="row">
         <div class="col-md-6">
@@ -33,7 +36,7 @@
                     <option>Gynecology</option>
                 </select>
 
-                <button class="btn btn-primary"><fmt:message key="views.action.search"/></button>
+                <button class="btn btn-primary search-button"><fmt:message key="views.action.search"/></button>
             </form>
         </div>
     </div>
@@ -52,7 +55,9 @@
                 <tbody>
                 <c:forEach var="item" items="${requestScope.model.getContent()}">
                     <tr>
-                        <td><a href="${pageContext.request.contextPath}/site/doctor?id=${item.getId()}">${item.getId()}</a></td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/site/doctor?id=${item.getId()}">${item.getId()}</a>
+                        </td>
                         <td>${item.getFirstName()}</td>
                         <td>${item.getLastName()}</td>
                         <td>${item.getSecession()}</td>

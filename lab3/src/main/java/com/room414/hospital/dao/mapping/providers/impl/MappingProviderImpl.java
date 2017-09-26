@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MappingProviderImpl implements MappingProvider {
-    private Map<Class<?>, RowMapper<?>> mappers = ApplicationContext.getInstance().getMappers();
+    private final Map<Class<?>, RowMapper<?>> mappers = ApplicationContext.getInstance().getMappers();
 
     @Override
     public <T> RowMapper<T> provide(Class<T> clazz) {
