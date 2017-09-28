@@ -2,7 +2,7 @@
 include_once("authFilter.php");
 include_once("config.php");
 
-$lastName = $_GET['date'];
+$lastName = isset($_GET['lastName']) ? "'" . $_GET['lastName'] . "%'" : "NULL";
 $limit = isset($_GET['limit']) ? $_GET['limit'] : 100;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 
@@ -12,9 +12,14 @@ $result = mysqli_query($mysqli, "
         ON doctor.application_user = duty.doctor    
       LEFT JOIN application_user        
         ON doctor.application_user = application_user.username 
-    WHERE ($lastName IS NULL OR doctor.last_name LIKE $lastName%) 
+    WHERE ($lastName IS NULL OR doctor.last_name LIKE $lastName) 
     LIMIT $limit OFFSET $offset
 ");
+
+if (!$result) {
+    die(mysqli_error($mysqli));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -103,12 +108,14 @@ $result = mysqli_query($mysqli, "
         <tbody>
         <?php
         while ($res = mysqli_fetch_array($result)) {
+            $doctor = $res['doctor'];
+
             echo "<tr>";
-            echo "<td>" . $res['duty.id'] . "</td>";
+            echo "<td>" . $res['id'] . "</td>";
             echo "<td>";
-            echo "<a href='doctor.php?id=${$res['doctor.application_user']}'>" . $res['doctor.application_user'] . "</a>";
+            echo "<a href='doctor.php?id=$doctor'>" . $doctor . "</a>";
             echo "</td>";
-            echo "<td>" . $res['duty.date'] . "</td>";
+            echo "<td>" . $res['date'] . "</td>";
             echo "<tr>";
         }
         ?>

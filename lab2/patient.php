@@ -24,10 +24,14 @@ if (isset($_POST['submit'])) {
             FROM doctor
               LEFT JOIN application_user
                 ON doctor.application_user = application_user.username 
-            WHERE application_user = $doctor
+            WHERE application_user = '$doctor'
         ");
 
-        if (mysql_fetch_array($result) === false) {
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
+
+        if (mysqli_num_rows($result) !== 1) {
             array_push($errors, "Doctor doesn't exist");
         }
     }
@@ -43,9 +47,13 @@ if (isset($_POST['submit'])) {
 
     if (empty($errors)) {
         if (isset($id)) {
-            $result = mysqli_query($mysqli, "UPDATE patient SET first_name = $firstName, last_name = $lastName, description = $description, doctor = $doctor WHERE id = $id");
+            $result = mysqli_query($mysqli, "UPDATE patient SET first_name = '$firstName', last_name = '$lastName', description = '$description', doctor = '$doctor' WHERE id = $id");
         } else {
-            $result = mysqli_query($mysqli, "INSERT INTO patient (first_name, last_name, description, doctor) VALUES ($firstName, $lastName, $description, $doctor)");
+            $result = mysqli_query($mysqli, "INSERT INTO patient (first_name, last_name, description, doctor) VALUES ('$firstName', '$lastName', '$description', '$doctor')");
+        }
+
+        if (!$result) {
+            die(mysqli_error($mysqli));
         }
 
         header("Location: patientList.php");
@@ -54,21 +62,25 @@ if (isset($_POST['submit'])) {
 } else if (isset($id)) {
 
     $result = mysqli_query($mysqli, "
-        SELECT * 
-        FROM patient    
-          LEFT JOIN doctor        
-            ON patient.doctor = doctor.application_user    
-          LEFT JOIN application_user        
-            ON doctor.application_user = application_user.username 
-        WHERE id = $id
+        SELECT p.id AS id, p.doctor AS doctor, p.first_name AS first_name, p.last_name AS last_name, p.description AS description
+        FROM patient AS p
+          LEFT JOIN doctor AS d       
+            ON p.doctor = d.application_user    
+          LEFT JOIN application_user AS a   
+            ON d.application_user = a.username 
+        WHERE id = '$id'
     ");
 
+    if (!$result) {
+        die(mysqli_error($mysqli));
+    }
+
     while ($res = mysqli_fetch_array($result)) {
-        $id = $res['patient.id'];
-        $doctor = $res['doctor.application_user'];
-        $firstName = $res['patient.first_name'];
-        $lastName = $res['patient.last_name'];
-        $description = $res['patient.description'];
+        $id = $res['id'];
+        $doctor = $res['doctor'];
+        $firstName = $res['first_name'];
+        $lastName = $res['last_name'];
+        $description = $res['description'];
     }
 }
 ?>
@@ -127,7 +139,7 @@ if (isset($_POST['submit'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>' . $error;
+        echo '<strong>Error </strong>' . $error;
         echo "</div>";
     }
 }

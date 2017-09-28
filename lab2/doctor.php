@@ -13,14 +13,18 @@ $result = mysqli_query($mysqli, "
             FROM doctor
               LEFT JOIN application_user
                 ON doctor.application_user = application_user.username 
-            WHERE application_user = $id
+            WHERE application_user = '$id'
 ");
 
+if (!$result) {
+    die(mysqli_error($mysqli));
+}
+
 while ($res = mysqli_fetch_array($result)) {
-    $username = $res['doctor.application_user'];
-    $firstName = $res['doctor.first_name'];
-    $lastName = $res['doctor.last_name'];
-    $secession = $res['doctor.secession'];
+    $username = $res['application_user'];
+    $firstName = $res['first_name'];
+    $lastName = $res['last_name'];
+    $secession = $res['secession'];
 }
 ?>
 

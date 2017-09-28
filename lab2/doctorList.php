@@ -2,8 +2,8 @@
 include_once("authFilter.php");
 include_once("config.php");
 
-$date = $_GET['date'];
-$secession = $_GET['secession'];
+$date = isset($_GET['date']) ? "'" . $_GET['date'] . "'" : "NULL";
+$secession = isset($_GET['secession']) ? "'" . $_GET['secession'] . "'" : "NULL";
 $limit = isset($_GET['limit']) ? $_GET['limit'] : 100;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 
@@ -18,6 +18,11 @@ $result = mysqli_query($mysqli, "
       AND ($date IS NULL OR duty.date = $date) 
     LIMIT $limit OFFSET $offset
 ");
+
+if (!$result) {
+    die(mysqli_error($mysqli));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -108,13 +113,15 @@ $result = mysqli_query($mysqli, "
         <tbody>
         <?php
         while ($res = mysqli_fetch_array($result)) {
+            $doctor = $res['application_user'];
+
             echo "<tr>";
             echo "<td>";
-            echo "<a href='doctor.php?id=${$res['doctor.application_user']}'>" . $res['doctor.application_user'] . "</a>";
+            echo "<a href='doctor.php?id=$doctor'>" . $doctor . "</a>";
             echo "</td>";
-            echo "<td>" . $res['doctor.first_name'] . "</td>";
-            echo "<td>" . $res['doctor.last_name'] . "</td>";
-            echo "<td>" . $res['doctor.secession'] . "</td>";
+            echo "<td>" . $res['first_name'] . "</td>";
+            echo "<td>" . $res['last_name'] . "</td>";
+            echo "<td>" . $res['secession'] . "</td>";
             echo "<tr>";
         }
         ?>

@@ -6,14 +6,18 @@ $limit = isset($_GET['limit']) ? $_GET['limit'] : 100;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 
 $result = mysqli_query($mysqli, "
-    SELECT * 
-    FROM patient    
-        LEFT JOIN doctor        
-          ON patient.doctor = doctor.application_user    
-        LEFT JOIN application_user        
-          ON doctor.application_user = application_user.username 
-    LIMIT ? OFFSET ?
+    SELECT p.id AS id, p.doctor AS doctor, p.first_name AS first_name, p.last_name AS last_name, p.description AS description
+    FROM patient AS p
+      LEFT JOIN doctor AS d       
+        ON p.doctor = d.application_user    
+      LEFT JOIN application_user AS a   
+        ON d.application_user = a.username 
+    LIMIT $limit OFFSET $offset
 ");
+
+if (!$result) {
+    die(mysqli_error($mysqli));
+}
 
 ?>
 
@@ -87,13 +91,16 @@ $result = mysqli_query($mysqli, "
         <tbody>
         <?php
         while ($res = mysqli_fetch_array($result)) {
+            $id = $res['id'];
+            $doctor = $res['doctor'];
+
             echo "<tr>";
-            echo "<td>" . $res['patient.id'] . "</td>";
+            echo "<td>" . $res['id'] . "</td>";
             echo "<td>";
-            echo "<a href='patient.php?id=${$res['patient.id']}'>" . $res['patient.first_name'] . " " . $res['patient.last_name'] . "</a>";
+            echo "<a href='patient.php?id=$id'>" . $res['first_name'] . " " . $res['last_name'] . "</a>";
             echo "</td>";
             echo "<td>";
-            echo "<a href='doctor.php?id=${$res['doctor.application_user']}'>" . $res['doctor.application_user'] . "</a>";
+            echo "<a href='doctor.php?id=$doctor'>" . $doctor . "</a>";
             echo "</td>";
             echo "<tr>";
         }

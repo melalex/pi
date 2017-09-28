@@ -23,14 +23,18 @@ if (isset($_POST['submit'])) {
     } else {
         $result = mysqli_query($mysqli, "SELECT * FROM application_user WHERE username = $username");
 
-        if (mysql_fetch_array($result) !== false) {
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
+
+        if (mysqli_num_rows($result) > 0) {
             array_push($errors, "User already exists");
         }
     }
 
     if (empty($password)) {
         array_push($errors, "Password field can't be empty");
-    } else if ($password == $retryPassword){
+    } else if ($password == $retryPassword) {
         array_push($errors, "Passwords did not matched");
     }
 
@@ -47,10 +51,19 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors)) {
-        $result = mysqli_query($mysqli, "INSERT INTO application_user (username, password) VALUES ($username, $password)");
-        $result = mysqli_query($mysqli, "INSERT INTO doctor (application_user, first_name, last_name, secession) VALUES ($username, $firstName, $lastName, $secession)");
+        $result = mysqli_query($mysqli, "INSERT INTO application_user (username, password) VALUES ('$username', '$password')");
 
-        setcookie("user", $username, (86400 * 30));
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
+
+        $result = mysqli_query($mysqli, "INSERT INTO doctor (application_user, first_name, last_name, secession) VALUES ('$username', '$firstName', '$lastName', '$secession')");
+
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
+
+        setcookie("user", $username, time() + (86400 * 30));
         header("Location: dutiesList.php");
         die();
     }
@@ -111,7 +124,7 @@ if (isset($_POST['submit'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>' . $error;
+        echo '<strong>Error </strong>' . $error;
         echo "</div>";
     }
 }
@@ -144,7 +157,7 @@ if (!empty($errors)) {
                     </label>
                     <div>
                         <div class="input-group">
-                            <input class="form-control" name="password" id="password"
+                            <input type="password" class="form-control" name="password" id="password"
                                    placeholder="Password"/>
                         </div>
                     </div>
@@ -156,7 +169,7 @@ if (!empty($errors)) {
                     </label>
                     <div>
                         <div class="input-group">
-                            <input class="form-control" name="retryPassword" id="retryPassword"
+                            <input type="password" class="form-control" name="retryPassword" id="retryPassword"
                                    placeholder="Retry Password"/>
                         </div>
                     </div>

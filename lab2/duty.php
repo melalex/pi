@@ -16,10 +16,14 @@ if (isset($_POST['submit'])) {
             FROM doctor
               LEFT JOIN application_user
                 ON doctor.application_user = application_user.username 
-            WHERE application_user = $doctor
+            WHERE application_user = '$doctor'
         ");
 
-        if (mysql_fetch_array($result) === false) {
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
+
+        if (mysqli_num_rows($result) !== 1) {
             array_push($errors, "Doctor doesn't exist");
         }
     }
@@ -30,7 +34,11 @@ if (isset($_POST['submit'])) {
 
 
     if (empty($errors)) {
-        $result = mysqli_query($mysqli, "INSERT INTO duty (doctor, date) VALUES ($doctor, $date)");
+        $result = mysqli_query($mysqli, "INSERT INTO duty (doctor, date) VALUES ('$doctor', '$date')");
+
+        if (!$result) {
+            die(mysqli_error($mysqli));
+        }
 
         header("Location: dutiesList.php");
         die();
@@ -92,7 +100,7 @@ if (isset($_POST['submit'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>'. $error;
+        echo '<strong>Error </strong>'. $error;
         echo "</div>";
     }
 }

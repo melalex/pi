@@ -18,14 +18,18 @@ if (isset($_POST['submit'])) {
         array_push($errors, "Password field can't be empty");
     }
 
-    $result = mysqli_query($mysqli, "SELECT * FROM application_user WHERE username = ? AND password = ?");
+    $result = mysqli_query($mysqli, "SELECT * FROM application_user WHERE username = '$username' AND password = '$password'");
 
-    if (mysql_fetch_array($result) === false) {
+    if (!$result) {
+        die(mysqli_error($mysqli));
+    }
+
+    if (mysqli_num_rows($result) !== 1) {
         array_push($errors, "User doesn't exist");
     }
 
     if (empty($errors)) {
-        setcookie("user", $username, (86400 * 30));
+        setcookie("user", $username, time() + (86400 * 30));
         header("Location: patientList.php");
         die();
     }
@@ -86,7 +90,7 @@ if (isset($_POST['submit'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>'. $error;
+        echo '<strong>Error </strong>' . $error;
         echo "</div>";
     }
 }

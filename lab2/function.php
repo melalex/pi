@@ -3,22 +3,18 @@ include_once("authFilter.php");
 
 $variable = $_POST['variable'];
 
-if (empty($variable)) {
-    array_push($errors, "Variable field can't be empty");
+if (isset($variable)) {
+    $a = 5.1;
+    $b = 0.9;
+
+    if ($variable <= 1) {
+        $result = pow($variable - 4, 2) + $a;
+    } else if ($variable <= 2) {
+        $result = 1.7 * pow(cos($variable), 2);
+    } else if ($variable > 2) {
+        $result = exp($a * $variable) * cos($b * $variable);
+    }
 }
-
-$a = 5.1;
-$b = 0.9;
-$result = 0;
-
-if ($variable <= 1) {
-    $result = pow($variable - 4, 2) + $a;
-} else if ($variable <= 2) {
-    $result = 1.7 * pow(cos($variable), 2);
-} else {
-    $result = exp($a * $variable) * cos($b * $variable);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -71,16 +67,6 @@ if ($variable <= 1) {
     </ul>
 </nav>
 
-<?php
-if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>' . $error;
-        echo "</div>";
-    }
-}
-?>
-
 <div class="container margit-top">
     <div class="text-center">
         <h1 class="title">Function</h1>
@@ -89,7 +75,7 @@ if (!empty($errors)) {
 
     <div class="main">
         <div class="main-login main-center">
-            <form action="duty.php" accept-charset="UTF-8" method="post">
+            <form action="function.php" accept-charset="UTF-8" method="post">
 
                 <div class="form-group">
                     <label for="variable">
