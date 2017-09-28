@@ -31,9 +31,18 @@
                     </label>
                     <div>
                         <div class="input-group">
-                            <input class="form-control" name="doctor" id="doctor"
-                                   placeholder="<fmt:message key="views.domain.doctor"/>"
-                                   value="<c:out value="${sessionScope.user.getId()}"/>"/>
+                            <c:choose>
+                                <c:when test="${requestScope.model != null}">
+                                    <input class="form-control" name="doctor" id="doctor"
+                                           placeholder="<fmt:message key="views.domain.doctor"/>"
+                                           value="<c:out value="${requestScope.model.getDoctor().getId()}"/>"/>
+                                </c:when>
+                            </c:choose>
+                            <c:otherwise>
+                                <input class="form-control" name="doctor" id="doctor"
+                                       placeholder="<fmt:message key="views.domain.doctor"/>"
+                                       value="<c:out value="${sessionScope.user.getId()}"/>"/>
+                            </c:otherwise>
                         </div>
                     </div>
                 </div>
