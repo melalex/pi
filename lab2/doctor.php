@@ -58,6 +58,11 @@ while ($res = mysqli_fetch_array($result)) {
                 Duties
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="function.php">
+                Function
+            </a>
+        </li>
     </ul>
 
     <ul>

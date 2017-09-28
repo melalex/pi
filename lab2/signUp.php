@@ -91,6 +91,11 @@ if (isset($_POST['submit'])) {
                 Duties
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="function.php">
+                Function
+            </a>
+        </li>
     </ul>
 
     <ul>

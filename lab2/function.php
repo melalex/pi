@@ -1,41 +1,24 @@
 <?php
 include_once("authFilter.php");
-include_once("config.php");
 
-if (isset($_POST['submit'])) {
-    $errors = array();
+$variable = $_POST['variable'];
 
-    $doctor = mysqli_real_escape_string($mysqli, $_POST['doctor']);
-    $date = mysqli_real_escape_string($mysqli, $_POST['date']);
-
-    if (empty($doctor)) {
-        array_push($errors, "Doctor field can't be empty");
-    } else {
-        $result = mysqli_query($mysqli, "
-            SELECT *
-            FROM doctor
-              LEFT JOIN application_user
-                ON doctor.application_user = application_user.username 
-            WHERE application_user = $doctor
-        ");
-
-        if (mysql_fetch_array($result) === false) {
-            array_push($errors, "Doctor doesn't exist");
-        }
-    }
-
-    if (empty($date)) {
-        array_push($errors, "Date field can't be empty");
-    }
-
-
-    if (empty($errors)) {
-        $result = mysqli_query($mysqli, "INSERT INTO duty (doctor, date) VALUES ($doctor, $date)");
-
-        header("Location: dutiesList.php");
-        die();
-    }
+if (empty($variable)) {
+    array_push($errors, "Variable field can't be empty");
 }
+
+$a = 5.1;
+$b = 0.9;
+$result = 0;
+
+if ($variable <= 1) {
+    $result = pow($variable - 4, 2) + $a;
+} else if ($variable <= 2) {
+    $result = 1.7 * pow(cos($variable), 2);
+} else {
+    $result = exp($a * $variable) * cos($b * $variable);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +75,7 @@ if (isset($_POST['submit'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo '<strong>Error</strong>'. $error;
+        echo '<strong>Error</strong>' . $error;
         echo "</div>";
     }
 }
@@ -100,40 +83,32 @@ if (!empty($errors)) {
 
 <div class="container margit-top">
     <div class="text-center">
-        <h1 class="title">Duty</h1>
+        <h1 class="title">Function</h1>
         <hr/>
     </div>
 
-    <div class="row main">
+    <div class="main">
         <div class="main-login main-center">
             <form action="duty.php" accept-charset="UTF-8" method="post">
 
                 <div class="form-group">
-                    <label for="doctor">
+                    <label for="variable">
                         Username
                     </label>
                     <div>
                         <div class="input-group">
-                            <input class="form-control" name="doctor" id="doctor"
-                                   placeholder="Doctor"
-                                   value="<?php echo $_COOKIE['user'] ?>"/>
+                            <input type="number" class="form-control" name="variable" id="variable"
+                                   placeholder="Variable"
+                                   value="<?php echo $variable ?>"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="date">
-                        Date
-                    </label>
-                    <div>
-                        <div class="input-group">
-                            <input type="date"
-                                   class="form-control"
-                                   name="date"
-                                   id="date"/>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                if (isset($result)) {
+                    echo "<p>Result is: " . $result . "</p>";
+                }
+                ?>
 
                 <input class="btn btn-primary btn-lg btn-block login-button" type="submit" name="submit"
                        value="Save">
